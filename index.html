@@ -138,64 +138,65 @@
     .mp3-btn:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0px var(--nj-black); }
 
     /* ============================================
-       🐈 REALISTIC VIRTUAL PET CAT (ĐÃ SỬA LỖI MẮT) 🐈
+       MÈO THẬT TƯƠNG TÁC (REAL CAT) - ĐÃ XÓA MẮT GIẢ
     ============================================ */
-    #cyber-cat {
+    #real-cat {
       position: fixed;
       bottom: 20px;
       right: 3vw;
-      width: 220px; /* Bự cỡ cái MP3 */
+      width: 220px; 
       z-index: 99;
       cursor: pointer;
-      /* Hiệu ứng Scrapbook: Đổ bóng cứng Y2K */
-      filter: drop-shadow(6px 6px 0px rgba(0,0,0,0.15)); 
-      transition: transform 0.3s var(--spring);
+      /* Điểm neo xoay ở giữa cạnh dưới để mèo lắc lư tự nhiên hơn */
+      transform-origin: center bottom;
+      transition: transform 0.15s ease-out; 
       display: flex; flex-direction: column; align-items: center;
     }
-    #cyber-cat:hover { transform: scale(1.05); } /* Rê chuột vào mèo phồng tí */
-
-    /* Ảnh con mèo thật đã xóa phông */
+    
     #cat-img {
       width: 100%; height: auto;
-      border-radius: 20px; /* Bo góc ảnh cho Scrapbook */
+      filter: drop-shadow(6px 6px 0px rgba(0,0,0,0.15)); 
+      transition: transform 0.3s var(--spring);
     }
 
-    /* Khung mắt layer trên ảnh mèo */
-    #cat-eyes-layer {
+    #real-cat:hover #cat-img {
+      transform: scale(1.05); 
+    }
+
+    /* Bong bóng chat */
+    .cat-dialogue {
       position: absolute;
-      top: 30%; /* Điều chỉnh tùy theo vị trí mắt trong cat.png của bạn */
-      left: 50%; transform: translateX(-50%);
-      width: 60%; /* Độ rộng vùng mắt */
-      display: flex; justify-content: space-between;
-      z-index: 2;
-    }
-
-    .cat-eye {
-      width: 35px; height: 35px;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%) scale(0);
       background: var(--nj-white);
-      border: 4px solid var(--nj-black);
-      border-radius: 50%;
-      position: relative;
-      overflow: hidden; /* Giữ lòng đen trong socket */
-      box-shadow: inset 2px 2px 0px rgba(0,0,0,0.2);
+      border: 3px solid var(--nj-black);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-family: var(--font-bubbly);
+      font-size: 1rem;
+      color: var(--nj-black);
+      white-space: nowrap;
+      box-shadow: 4px 4px 0px var(--nj-black);
+      transition: transform 0.3s var(--spring), opacity 0.2s;
+      opacity: 0;
+      z-index: 10;
     }
-
-    .cat-pupil {
+    
+    .cat-dialogue::after {
+      content: '';
       position: absolute;
-      top: 5px; left: 5px;
-      width: 18px; height: 18px;
-      background: var(--nj-black);
-      border-radius: 50%;
-      /* **SỬA LỖI:** transform translate ban đầu là 0,0 để JS điều khiển */
-      transform: translate(0px, 0px); 
-    }
-    .cat-pupil::after { /* Đốm sáng tạo độ chân thật cho mắt illustration */
-      content: ''; position: absolute;
-      top: 3px; left: 3px; width: 6px; height: 6px;
-      background: var(--nj-white); border-radius: 50%;
+      bottom: -8px; left: 50%; transform: translateX(-50%);
+      border-width: 8px 8px 0;
+      border-style: solid;
+      border-color: var(--nj-black) transparent transparent transparent;
     }
 
-    /* Contact link embedded near cat */
+    .cat-dialogue.show {
+      transform: translateX(-50%) scale(1);
+      opacity: 1;
+    }
+
     #cat-contact {
       position: absolute; bottom: -30px;
       background: var(--nj-black); color: var(--nj-white);
@@ -315,7 +316,7 @@
       body { cursor: auto; }
       .cursor { display: none; }
       #particles-container { display: none; }
-      #cyber-cat { display: none; }
+      #real-cat { display: none; }
     }
   </style>
 </head>
@@ -325,18 +326,9 @@
 
   <div class="cursor" id="cursor"></div>
 
-  <div id="cyber-cat">
-    <img src="cat.png" alt="Mèo con béo ú đã kẹt" id="cat-img">
-    
-    <div id="cat-eyes-layer">
-      <div class="cat-eye left">
-        <div class="cat-pupil" id="pupil-l"></div>
-      </div>
-      <div class="cat-eye right">
-        <div class="cat-pupil" id="pupil-r"></div>
-      </div>
-    </div>
-    
+  <div id="real-cat">
+    <div class="cat-dialogue" id="cat-dialogue">Meowww~ ✨</div>
+    <img src="cat.png" alt="Mèo của Linh" id="cat-img">
     <a href="#contact" id="cat-contact">GET LINH .txt</a>
   </div>
 
@@ -453,70 +445,54 @@
     </div>
   </section>
 
-<section id="contact" style="text-align: center; padding-bottom: 10rem;">
+  <section id="contact" style="text-align: center; padding-bottom: 10rem;">
     <h2 class="section-title sticker-text pink">LET'S CHAT!</h2>
     <p style="font-weight: 600; margin-bottom: 2rem;">Always open for exciting opportunities or just a fun chat about K-pop! 🎶</p>
     
     <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-      
       <div class="btn-magnetic-wrap">
         <a href="mailto:phamailinhbn@gmail.com" class="btn hover-target magnetic" style="background: var(--nj-white); padding: 0.8rem 2rem; font-size: 1rem;">💌 EMAIL ME</a>
       </div>
-
       <div class="btn-magnetic-wrap">
         <a href="https://www.linkedin.com/in/linh-pham-bb7b153a8/" target="_blank" class="btn hover-target magnetic" style="background: var(--nj-blue); padding: 0.8rem 2rem; font-size: 1rem;">💼 LINKEDIN</a>
       </div>
-
       <div class="btn-magnetic-wrap">
         <a href="https://www.facebook.com/linhxinhdephaha" target="_blank" class="btn hover-target magnetic" style="background: var(--nj-pink); padding: 0.8rem 2rem; font-size: 1rem;">✨ FACEBOOK</a>
       </div>
-
     </div>
   </section>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       
-      // Khai báo lại các thành phần của bé mèo chân thật
-      const pupilL = document.getElementById('pupil-l');
-      const pupilR = document.getElementById('pupil-r');
-      const catEyesLayer = document.getElementById('cat-eyes-layer');
+      // LOGIC MÈO THẬT XOAY ĐẦU (PARALLAX 3D)
+      const realCat = document.getElementById('real-cat');
+      const catDialogue = document.getElementById('cat-dialogue');
 
-      // 1. MAGNETIC CURSOR & **SỬA LỖI MẮT TRAI**
       const cursor = document.getElementById('cursor');
       if (window.matchMedia("(pointer: fine)").matches) {
         document.addEventListener('mousemove', e => {
-          // Di chuyển con trỏ chuột custom
+          // Di chuyển con trỏ chuột
           requestAnimationFrame(() => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
           });
 
-          // **LOGIC SỬA LỖI MẮT MÈO NHÌN THEO CHUỘT**
-          if (pupilL && pupilR && catEyesLayer) {
-            function movePupil(pupil, mouseX, mouseY) {
-              const rect = pupil.parentElement.getBoundingClientRect(); // Khung socket
-              
-              // **SỬA:** Lấy tâm chuẩn của socket tương đối với màn hình
-              const eyeX = rect.left + rect.width / 2;
-              const eyeY = rect.top + rect.height / 2;
-              
-              // **SỬA:** Tính góc dựa trên chênh lệch mouse và eyeCenter
-              // Math.atan2(deltaY, deltaX)
-              const angle = Math.atan2(mouseY - eyeY, mouseX - eyeX);
-              
-              const maxDist = 6; // Giới hạn lòng đen di chuyển trong socket (6px)
-              
-              // **SỬA:** Dùng toán chuẩn để tính tx, ty dựa trên góc
-              const tx = Math.cos(angle) * maxDist;
-              const ty = Math.sin(angle) * maxDist;
-              
-              // **SỬA:** Áp dụng translate mượt mà
-              pupil.style.transform = `translate(${tx}px, ${ty}px)`;
-            }
-
-            movePupil(pupilL, e.clientX, e.clientY);
-            movePupil(pupilR, e.clientX, e.clientY);
+          // Toán học để tấm ảnh xoay nghiêng 3D nhìn theo chuột
+          if (realCat && !realCat.classList.contains('acting')) {
+            const rect = realCat.getBoundingClientRect();
+            // Tâm của bức ảnh
+            const catX = rect.left + rect.width / 2;
+            const catY = rect.top + rect.height / 2;
+            
+            const deltaX = e.clientX - catX;
+            const deltaY = e.clientY - catY;
+            
+            // Xoay ảnh mô phỏng việc "nhìn" theo chuột (Giới hạn góc xoay 18 độ để trông mượt)
+            const rotateY = Math.max(-18, Math.min(18, deltaX * 0.05)); // Xoay ngang
+            const rotateX = Math.max(-15, Math.min(15, -deltaY * 0.05)); // Ngước lên/xuống
+            
+            realCat.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
           }
         });
 
@@ -526,7 +502,30 @@
         });
       }
 
-      // 2. MAGNETIC BUTTON
+      // LOGIC MÈO HÀNH ĐỘNG NGẪU NHIÊN
+      setInterval(() => {
+        // Tỷ lệ 30% mèo sẽ hành động mỗi 6 giây
+        if (Math.random() > 0.7 && realCat) { 
+          realCat.classList.add('acting');
+          
+          // Mèo nhún nhảy / giật nhẹ người
+          realCat.style.transition = 'transform 0.3s var(--spring)';
+          realCat.style.transform = `perspective(600px) scale(1.08) rotate(-3deg)`;
+          
+          // Hiện khung chat kêu meow
+          catDialogue.classList.add('show');
+          
+          setTimeout(() => {
+            // Trở về bình thường sau 2.5 giây
+            realCat.style.transition = 'transform 0.2s ease-out';
+            realCat.style.transform = `perspective(600px) scale(1) rotate(0deg)`;
+            catDialogue.classList.remove('show');
+            realCat.classList.remove('acting');
+          }, 2500); 
+        }
+      }, 6000);
+
+      // MAGNETIC BUTTON
       const magnets = document.querySelectorAll('.magnetic');
       magnets.forEach(magnet => {
         magnet.addEventListener('mousemove', function(e) {
@@ -540,7 +539,7 @@
         });
       });
 
-      // 3. DRAGGABLE STICKERS
+      // DRAGGABLE STICKERS
       const draggables = document.querySelectorAll('.draggable');
       draggables.forEach(el => {
         let isDragging = false, currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
@@ -573,7 +572,7 @@
         }
       });
 
-      // 4. FUNCTIONAL MP3 PLAYER (Đã vá lỗi xong)
+      // FUNCTIONAL MP3 PLAYER
       const audio = document.getElementById('bg-music');
       const playBtn = document.getElementById('play-btn');
       const prevBtn = document.getElementById('prev-btn');
@@ -591,10 +590,9 @@
 
       function loadTrack(index) {
         audio.src = playlist[index].src;
-        audio.load(); // BẮT BUỘC: Ép trình duyệt tải file nhạc mới
+        audio.load();
 
         if (isPlaying) {
-          // Xử lý an toàn để tránh lỗi Promise
           let playPromise = audio.play();
           if (playPromise !== undefined) {
             playPromise.catch(error => console.log("Audio play error:", error));
@@ -613,10 +611,7 @@
           playBtn.innerHTML = '▶';
           mp3Text.innerHTML = `⏸ Paused: ${playlist[currentTrack].title}`;
         } else {
-          // Bắt đầu phát từ bài đầu tiên nếu chưa có src
-          if (!audio.src || audio.src === window.location.href) {
-            loadTrack(currentTrack);
-          }
+          if (!audio.src || audio.src === window.location.href) loadTrack(currentTrack);
           let playPromise = audio.play();
           if (playPromise !== undefined) {
             playPromise.catch(error => console.log("Audio play error:", error));
@@ -629,31 +624,29 @@
 
       nextBtn.addEventListener('click', () => {
         currentTrack = (currentTrack + 1) % playlist.length;
-        isPlaying = true; // Ép trạng thái thành Đang phát
+        isPlaying = true;
         loadTrack(currentTrack);
       });
 
       prevBtn.addEventListener('click', () => {
         currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
-        isPlaying = true; // Ép trạng thái thành Đang phát
+        isPlaying = true;
         loadTrack(currentTrack);
       });
 
-      // Tự động chuyển bài
       audio.addEventListener('ended', () => {
         currentTrack = (currentTrack + 1) % playlist.length;
         isPlaying = true;
         loadTrack(currentTrack);
       });
 
-      // Báo lỗi file nhạc
       audio.addEventListener('error', () => {
         mp3Text.innerHTML = `⚠️ LỖI: Không tìm thấy file ${playlist[currentTrack].src}`;
         isPlaying = false;
         playBtn.innerHTML = '▶';
       });
       
-      // 5. Y2K FLOATING PARTICLES
+      // FLOATING PARTICLES
       const container = document.getElementById('particles-container');
       const shapes = ['✨', '💖', '⭐', '🫧', '🦋', '🎵'];
       
@@ -662,7 +655,6 @@
         p.classList.add('particle');
         p.innerText = shapes[Math.floor(Math.random() * shapes.length)];
         
-        // Random vị trí và thời gian bay
         p.style.left = Math.random() * 100 + 'vw';
         p.style.animationDuration = (Math.random() * 7 + 5) + 's';
         p.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
