@@ -261,7 +261,7 @@
 
   <div class="cursor" id="cursor"></div>
 
-  <audio id="bg-music" src="getup.mp3" loop></audio>
+  <audio id="bg-music" src="getup.mp3"></audio>
 
   <div class="sticker draggable" id="stk-1">🦋</div>
   <div class="sticker draggable" id="stk-2">💿</div>
@@ -274,10 +274,10 @@
     <div class="mp3-screen">
       <marquee id="mp3-text" scrollamount="4">⏸ Click Play to Get Up! - NewJeans</marquee>
     </div>
-    <div class="mp3-controls">
-      <div class="mp3-btn hover-target">⏮</div>
+   <div class="mp3-controls">
+      <div class="mp3-btn hover-target" id="prev-btn">⏮</div>
       <div class="mp3-btn hover-target" id="play-btn" style="background: var(--nj-green);">▶</div>
-      <div class="mp3-btn hover-target">⏭</div>
+      <div class="mp3-btn hover-target" id="next-btn">⏭</div>
     </div>
   </div>
 
@@ -447,23 +447,70 @@
         }
       });
 
-      // 4. FUNCTIONAL MP3 PLAYER (NewJeans - Get Up)
+      // 4. FUNCTIONAL MP3 PLAYER (PLAYLIST)
       const audio = document.getElementById('bg-music');
       const playBtn = document.getElementById('play-btn');
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
       const mp3Text = document.getElementById('mp3-text');
+
+      // Danh sách nhạc của bạn (Chú ý tên file .mp3 phải khớp 100% với file tải lên GitHub)
+      const playlist = [
+        { title: "NewJeans - Get Up 🐰", src: "getup.mp3" },
+        { title: "KiiiKiii - Delulu 🤪", src: "delulu.mp3" },
+        { title: "LNGSHOT - Never Let Go 💫", src: "neverletgo.mp3" }
+      ];
+
+      let currentTrack = 0;
       let isPlaying = false;
 
+      // Hàm tải bài hát mới
+      function loadTrack(index) {
+        audio.src = playlist[index].src;
+        if (isPlaying) {
+          audio.play();
+          playBtn.innerHTML = '⏸';
+          mp3Text.innerHTML = `▶ NOW PLAYING: ${playlist[index].title}`;
+        } else {
+          playBtn.innerHTML = '▶';
+          mp3Text.innerHTML = `⏸ NEXT: ${playlist[index].title}`;
+        }
+      }
+
+      // Nút Play / Pause
       playBtn.addEventListener('click', () => {
         if (isPlaying) {
           audio.pause();
           playBtn.innerHTML = '▶';
-          mp3Text.innerHTML = '⏸ Paused. Click Play to Get Up!';
+          mp3Text.innerHTML = `⏸ Paused: ${playlist[currentTrack].title}`;
         } else {
           audio.play();
           playBtn.innerHTML = '⏸';
-          mp3Text.innerHTML = '▶ NOW PLAYING: NewJeans - Get Up 🐰✨';
+          mp3Text.innerHTML = `▶ NOW PLAYING: ${playlist[currentTrack].title}`;
         }
         isPlaying = !isPlaying;
+      });
+
+      // Nút Next (Tới bài)
+      nextBtn.addEventListener('click', () => {
+        currentTrack = (currentTrack + 1) % playlist.length;
+        loadTrack(currentTrack);
+      });
+
+      // Nút Prev (Lùi bài)
+      prevBtn.addEventListener('click', () => {
+        currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+        loadTrack(currentTrack);
+      });
+
+      // Tự động chuyển bài khi bài hiện tại chạy hết
+      audio.addEventListener('ended', () => {
+        currentTrack = (currentTrack + 1) % playlist.length;
+        loadTrack(currentTrack);
+        audio.play();
+        isPlaying = true;
+        playBtn.innerHTML = '⏸';
+        mp3Text.innerHTML = `▶ NOW PLAYING: ${playlist[currentTrack].title}`;
       });
 
       // 5. Y2K FLOATING PARTICLES
