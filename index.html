@@ -10,7 +10,7 @@
 
   <style>
     /* ============================================
-       NEWJEANS CORE TOKENS
+  
     ============================================ */
     :root {
       --nj-blue:    #a0cfff; 
@@ -312,7 +312,7 @@
       <div class="about-text">
         <p>Hello there! 👋 I'm a Gen Z marketer who believes that the best campaigns are built on empathy, psychology, and a touch of web magic.</p>
         <br>
-        <p>Currently, I'm honing my skills as an intern at <span class="highlight">Hạc Natural Beauty Care</span>, where I get to blend my love for communication strategy with real-world brand storytelling. When I'm not writing PR articles, analyzing PESTEL, or drafting TVC scripts, you can find me learning how to code interactive websites (just like this one!).</p>
+        <p>Currently, I'm honing my skills as an intern at <span class="highlight">Công ty Tâm Anh</span>, where I get to blend my love for communication strategy with real-world brand storytelling. When I'm not writing PR articles, analyzing PESTEL, or drafting TVC scripts, you can find me learning how to code interactive websites (just like this one!).</p>
         <br>
         <p>My ultimate goal? To become a marketer who doesn't just brief campaigns, but actively builds the experiences surrounding them.</p>
       </div>
@@ -324,7 +324,7 @@
         </div>
         <div class="polaroid hover-target">
           <div class="polaroid-img" style="background: #cbf078;">🌿</div>
-          <div class="polaroid-caption">Hạc Beauty Care</div>
+          <div class="polaroid-caption">Công ty Tâm Anh</div>
         </div>
         <div class="polaroid hover-target">
           <div class="polaroid-img" style="background: #a0cfff;">💻</div>
@@ -343,7 +343,7 @@
         <div class="project-img">✨</div>
         <div>
           <div class="project-tag">CONTENT & PR</div>
-          <h3 class="project-title">Hạc Natural Beauty Care</h3>
+          <h3 class="project-title">Công ty Tâm Anh</h3>
           <p>During my internship, I developed content strategies and assisted with PR campaigns. I learned how to translate a brand's core values into engaging stories that resonate with the target audience.</p>
         </div>
       </div>
@@ -378,7 +378,7 @@
     <h2 class="section-title sticker-text pink">LET'S CHAT!</h2>
     <p style="font-weight: 600; margin-bottom: 2rem;">Always open for exciting opportunities or just a fun chat about K-pop! 🎶</p>
     <div class="btn-magnetic-wrap">
-      <a href="mailto:your@email.com" class="btn hover-target magnetic" style="background: var(--nj-white);">SEND MESSAGE 💌</a>
+      <a href="mailto:phamailinhbn@gmail.com" class="btn hover-target magnetic" style="background: var(--nj-white);">SEND MESSAGE 💌</a>
     </div>
   </section>
 
@@ -447,7 +447,7 @@
         }
       });
 
-      // 4. FUNCTIONAL MP3 PLAYER (PLAYLIST) - BẢN CHUẨN KỸ THUẬT
+      // 4. FUNCTIONAL MP3 PLAYER (PLAYLIST)
       const audio = document.getElementById('bg-music');
       const playBtn = document.getElementById('play-btn');
       const prevBtn = document.getElementById('prev-btn');
@@ -468,7 +468,6 @@
         audio.load(); // BẮT BUỘC: Ép trình duyệt tải file nhạc mới
 
         if (isPlaying) {
-          // Xử lý an toàn để tránh lỗi Promise của trình duyệt
           let playPromise = audio.play();
           if (playPromise !== undefined) {
             playPromise.catch(error => {
@@ -519,7 +518,6 @@
         loadTrack(currentTrack);
       });
 
-      // TÍNH NĂNG MỚI: Báo lỗi nếu file nhạc hỏng hoặc không tồn tại
       audio.addEventListener('error', () => {
         mp3Text.innerHTML = `⚠️ LỖI: Không tìm thấy file ${playlist[currentTrack].src}`;
         isPlaying = false;
@@ -535,20 +533,16 @@
         p.classList.add('particle');
         p.innerText = shapes[Math.floor(Math.random() * shapes.length)];
         
-        // Random vị trí chiều ngang
+
         p.style.left = Math.random() * 100 + 'vw';
-        // Random thời gian bay (từ 5 đến 12 giây để tạo độ ngẫu nhiên)
         p.style.animationDuration = (Math.random() * 7 + 5) + 's';
-        // Random kích thước
         p.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
         
         container.appendChild(p);
         
-        // Xóa particle sau khi bay xong để khỏi nặng máy
         setTimeout(() => p.remove(), 12000);
       }
       
-      // Tạo particle mới mỗi 600ms
       setInterval(createParticle, 600);
       
     });
