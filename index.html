@@ -447,14 +447,13 @@
         }
       });
 
-      // 4. FUNCTIONAL MP3 PLAYER (PLAYLIST)
+      // 4. FUNCTIONAL MP3 PLAYER (PLAYLIST) - BẢN CHUẨN KỸ THUẬT
       const audio = document.getElementById('bg-music');
       const playBtn = document.getElementById('play-btn');
       const prevBtn = document.getElementById('prev-btn');
       const nextBtn = document.getElementById('next-btn');
       const mp3Text = document.getElementById('mp3-text');
 
-      // Danh sách nhạc của bạn (Chú ý tên file .mp3 phải khớp 100% với file tải lên GitHub)
       const playlist = [
         { title: "NewJeans - Get Up 🐰", src: "getup.mp3" },
         { title: "KiiiKiii - Delulu 🤪", src: "delulu.mp3" },
@@ -464,11 +463,18 @@
       let currentTrack = 0;
       let isPlaying = false;
 
-      // Hàm tải bài hát mới
       function loadTrack(index) {
         audio.src = playlist[index].src;
+        audio.load(); // BẮT BUỘC: Ép trình duyệt tải file nhạc mới
+
         if (isPlaying) {
-          audio.play();
+          // Xử lý an toàn để tránh lỗi Promise của trình duyệt
+          let playPromise = audio.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(error => {
+              console.log("Audio play error:", error);
+            });
+          }
           playBtn.innerHTML = '⏸';
           mp3Text.innerHTML = `▶ NOW PLAYING: ${playlist[index].title}`;
         } else {
@@ -477,42 +483,49 @@
         }
       }
 
-      // Nút Play / Pause
       playBtn.addEventListener('click', () => {
         if (isPlaying) {
           audio.pause();
           playBtn.innerHTML = '▶';
           mp3Text.innerHTML = `⏸ Paused: ${playlist[currentTrack].title}`;
         } else {
-          audio.play();
+          let playPromise = audio.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(error => {
+              console.log("Audio play error:", error);
+            });
+          }
           playBtn.innerHTML = '⏸';
           mp3Text.innerHTML = `▶ NOW PLAYING: ${playlist[currentTrack].title}`;
         }
         isPlaying = !isPlaying;
       });
 
-      // Nút Next (Tới bài)
       nextBtn.addEventListener('click', () => {
         currentTrack = (currentTrack + 1) % playlist.length;
+        isPlaying = true;
         loadTrack(currentTrack);
       });
 
-      // Nút Prev (Lùi bài)
       prevBtn.addEventListener('click', () => {
         currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+        isPlaying = true;
         loadTrack(currentTrack);
       });
 
-      // Tự động chuyển bài khi bài hiện tại chạy hết
       audio.addEventListener('ended', () => {
         currentTrack = (currentTrack + 1) % playlist.length;
-        loadTrack(currentTrack);
-        audio.play();
         isPlaying = true;
-        playBtn.innerHTML = '⏸';
-        mp3Text.innerHTML = `▶ NOW PLAYING: ${playlist[currentTrack].title}`;
+        loadTrack(currentTrack);
       });
 
+      // TÍNH NĂNG MỚI: Báo lỗi nếu file nhạc hỏng hoặc không tồn tại
+      audio.addEventListener('error', () => {
+        mp3Text.innerHTML = `⚠️ LỖI: Không tìm thấy file ${playlist[currentTrack].src}`;
+        isPlaying = false;
+        playBtn.innerHTML = '▶';
+      });
+      
       // 5. Y2K FLOATING PARTICLES
       const container = document.getElementById('particles-container');
       const shapes = ['✨', '💖', '⭐', '🫧', '🦋', '🎵'];
