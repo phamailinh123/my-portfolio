@@ -41,7 +41,6 @@
     }
     a, button { cursor: none; text-decoration: none; color: inherit; font-family: inherit;}
 
-    /* Background pattern */
     body::before {
       content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       background-image: linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px),
@@ -50,7 +49,7 @@
     }
 
     /* ============================================
-       FLOATING Y2K PARTICLES
+       FLOATING PARTICLES
     ============================================ */
     #particles-container {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -69,7 +68,7 @@
     }
 
     /* ============================================
-       MAGNETIC BUBBLE CURSOR
+       MAGNETIC CURSOR
     ============================================ */
     .cursor {
       position: fixed; top: 0; left: 0; width: 16px; height: 16px;
@@ -105,7 +104,6 @@
       transition: transform 0.2s;
     }
     .sticker:active { cursor: grabbing; transform: scale(1.1) rotate(5deg); }
-    
     #stk-1 { top: 15%; left: 10%; transform: rotate(-15deg); }
     #stk-2 { top: 40%; right: 5%; transform: rotate(10deg); font-size: 5rem;}
     #stk-3 { top: 80%; left: 8%; transform: rotate(-5deg); font-size: 3.5rem;}
@@ -113,7 +111,7 @@
     #stk-5 { top: 150%; left: 15%; transform: rotate(-25deg); font-size: 4rem;}
 
     /* ============================================
-       RETRO MP3 PLAYER WIDGET
+       RETRO MP3 PLAYER
     ============================================ */
     .mp3-player {
       position: fixed; bottom: 30px; left: 30px; width: 260px; background: #e0e0e0;
@@ -140,144 +138,172 @@
     .mp3-btn:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0px var(--nj-black); }
 
     /* ============================================
-       Y2K INTERACTIVE CAT (VIRTUAL PET)
+       Y2K CHUBBY CAT (VIRTUAL PET) - NÂNG CẤP XỊN SÒ
     ============================================ */
     #cyber-cat {
       position: fixed;
-      bottom: 20px;
-      right: 3vw;
-      width: 100px;
-      height: 110px;
-      z-index: 999;
-      filter: drop-shadow(4px 4px 0px var(--nj-black));
+      bottom: 30px;
+      right: 40px;
+      width: 240px; /* Bự ngang cái MP3 */
+      height: 200px;
+      z-index: 99;
       cursor: pointer;
+      filter: drop-shadow(6px 6px 0px rgba(0,0,0,0.15));
       transition: transform 0.3s var(--spring);
     }
     #cyber-cat:hover { transform: translateY(-10px); }
     
+    /* Đuôi béo */
     .cat-tail {
       position: absolute;
-      bottom: 15px; right: -15px;
-      width: 40px; height: 50px;
-      border: 5px solid var(--nj-black);
+      bottom: 20px; right: -20px;
+      width: 80px; height: 80px;
+      border: 6px solid var(--nj-black);
       border-radius: 0 40px 40px 0;
       border-left: none; border-bottom: none;
       transform-origin: bottom left;
-      animation: wag 2s infinite alternate ease-in-out;
+      animation: wag 3s infinite alternate ease-in-out;
       z-index: 0;
     }
-    .cat-ear {
-      position: absolute; top: -5px;
-      width: 0; height: 0;
-      border-left: 15px solid transparent;
-      border-right: 15px solid transparent;
-      border-bottom: 30px solid var(--nj-black);
-      z-index: 1;
-    }
-    .cat-ear::after {
-      content: ''; position: absolute;
-      top: 6px; left: -7px;
-      border-left: 7px solid transparent;
-      border-right: 7px solid transparent;
-      border-bottom: 18px solid var(--nj-pink);
-    }
-    .cat-ear.left { left: 5px; transform: rotate(-20deg); }
-    .cat-ear.right { right: 5px; transform: rotate(20deg); }
     
+    /* Thân hình béo ú */
     .cat-body {
       position: absolute;
-      bottom: 0; left: 10px;
-      width: 80px; height: 60px;
+      bottom: 0; left: 20px;
+      width: 180px; height: 140px;
       background: var(--nj-white);
-      border: 4px solid var(--nj-black);
-      border-radius: 40px 40px 20px 20px;
-      z-index: 2;
-    }
-    .cat-head {
-      position: absolute;
-      top: 5px; left: 0;
-      width: 100px; height: 75px;
-      background: var(--nj-white);
-      border: 4px solid var(--nj-black);
-      border-radius: 50px;
-      z-index: 3;
-    }
-    .cat-eye {
-      position: absolute; top: 25px;
-      width: 16px; height: 22px;
-      background: var(--nj-white);
-      border: 3px solid var(--nj-black);
-      border-radius: 50%;
-      display: flex; justify-content: center; align-items: center;
-    }
-    .cat-eye.left { left: 22px; }
-    .cat-eye.right { right: 22px; }
-    
-    .cat-pupil {
-      width: 8px; height: 8px;
-      background: var(--nj-black);
-      border-radius: 50%;
-      /* Vị trí được điều khiển bằng JS */
-    }
-    .cat-blush {
-      position: absolute; top: 40px;
-      width: 12px; height: 6px;
-      background: var(--nj-pink);
-      border-radius: 50%; opacity: 0.6;
-    }
-    .cat-blush.left { left: 10px; }
-    .cat-blush.right { right: 10px; }
-    
-    .cat-mouth {
-      position: absolute;
-      top: 35px; left: 50%;
-      transform: translateX(-50%);
-      font-size: 16px; font-weight: bold;
-      color: var(--nj-black);
-    }
-    .cat-tongue {
-      position: absolute;
-      top: 52px; left: 50%;
-      transform: translateX(-50%) scaleY(0);
-      transform-origin: top;
-      width: 10px; height: 14px;
-      background: var(--nj-pink);
-      border: 2px solid var(--nj-black);
-      border-radius: 0 0 10px 10px;
-      transition: transform 0.2s;
-      z-index: 4;
-    }
-    .cat-paw-fg {
-      position: absolute;
-      bottom: -5px; left: 20px;
-      width: 20px; height: 25px;
-      background: var(--nj-white);
-      border: 3px solid var(--nj-black);
-      border-radius: 10px; z-index: 5;
-      transform-origin: bottom;
-      transition: transform 0.3s;
+      border: 6px solid var(--nj-black);
+      border-radius: 90px 90px 40px 40px;
+      z-index: 1;
     }
 
-    /* Hiệu ứng Mèo Licking (Liếm lông) */
+    /* Hai lỗ tai dễ thương */
+    .cat-ear {
+      position: absolute;
+      top: -20px;
+      width: 60px; height: 60px;
+      background: var(--nj-white);
+      border: 6px solid var(--nj-black);
+      z-index: 0;
+    }
+    .cat-ear.left {
+      left: 10px; border-radius: 15px 40px 15px 15px; transform: rotate(-15deg);
+    }
+    .cat-ear.right {
+      right: 10px; border-radius: 40px 15px 15px 15px; transform: rotate(15deg);
+    }
+    .cat-ear::after { /* Lòng tai màu hồng */
+      content: ''; position: absolute;
+      width: 25px; height: 25px;
+      background: var(--nj-pink);
+      bottom: 5px;
+    }
+    .cat-ear.left::after { left: 15px; border-radius: 5px 20px 5px 5px; }
+    .cat-ear.right::after { right: 15px; border-radius: 20px 5px 5px 5px; }
+
+    /* Mắt to tròn long lanh */
+    .cat-eye {
+      position: absolute; top: 50px;
+      width: 40px; height: 40px;
+      background: var(--nj-white);
+      border: 5px solid var(--nj-black);
+      border-radius: 50%;
+      overflow: hidden;
+      z-index: 2;
+    }
+    .cat-eye.left { left: 35px; }
+    .cat-eye.right { right: 35px; }
+    
+    .cat-pupil {
+      position: absolute;
+      top: 5px; left: 5px;
+      width: 24px; height: 24px;
+      background: var(--nj-black);
+      border-radius: 50%;
+    }
+    .cat-pupil::after { /* Đốm sáng Anime */
+      content: ''; position: absolute;
+      top: 3px; left: 3px; width: 8px; height: 8px;
+      background: var(--nj-white); border-radius: 50%;
+    }
+
+    /* Má hồng */
+    .cat-blush {
+      position: absolute; top: 75px;
+      width: 20px; height: 10px;
+      background: var(--nj-pink);
+      border-radius: 50%; opacity: 0.6;
+      z-index: 2;
+    }
+    .cat-blush.left { left: 15px; }
+    .cat-blush.right { right: 15px; }
+    
+    /* Mũi & Miệng chúm chím :3 */
+    .cat-nose {
+      position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
+      width: 12px; height: 8px; background: var(--nj-pink);
+      border-radius: 10px 10px 20px 20px; z-index: 2;
+    }
+    .cat-mouth {
+      position: absolute; top: 86px; left: 50%; transform: translateX(-50%);
+      display: flex; z-index: 2;
+    }
+    .cat-mouth::before, .cat-mouth::after {
+      content: ''; width: 14px; height: 12px;
+      border-bottom: 4px solid var(--nj-black); border-radius: 50%;
+    }
+    .cat-mouth::before { border-left: 4px solid var(--nj-black); transform: rotate(-20deg); margin-right: -2px; }
+    .cat-mouth::after { border-right: 4px solid var(--nj-black); transform: rotate(20deg); margin-left: -2px; }
+
+    /* Chân nghỉ ngơi */
+    .cat-paw-rest {
+      position: absolute; bottom: -5px;
+      width: 40px; height: 30px;
+      background: var(--nj-white);
+      border: 5px solid var(--nj-black);
+      border-radius: 20px; z-index: 3;
+    }
+    .cat-paw-rest.left { left: 40px; }
+    .cat-paw-rest.right { right: 40px; }
+
+    /* Lưỡi và Chân lúc liếm lông (Ẩn đi theo mặc định) */
+    .cat-tongue {
+      position: absolute; top: 92px; left: 50%; transform: translateX(-50%) scaleY(0);
+      transform-origin: top; width: 14px; height: 18px; background: var(--nj-pink);
+      border: 3px solid var(--nj-black); border-radius: 0 0 15px 15px; z-index: 1;
+    }
+    .cat-paw-licking {
+      position: absolute; top: 80px; left: 50%; margin-left: -20px;
+      width: 40px; height: 50px; background: var(--nj-white);
+      border: 5px solid var(--nj-black); border-radius: 25px;
+      opacity: 0; z-index: 4; transform-origin: bottom center;
+    }
+
+    /* ============================================
+       ANIMATION TRẠNG THÁI MÈO
+    ============================================ */
+    @keyframes wag {
+      0% { transform: rotate(5deg); }
+      100% { transform: rotate(25deg); }
+    }
+    
     .licking .cat-tongue {
       transform: translateX(-50%) scaleY(1);
       animation: lickAnim 0.3s infinite alternate;
     }
-    .licking .cat-paw-fg {
-      animation: pawAnim 0.3s infinite alternate;
+    .licking .cat-paw-licking {
+      opacity: 1;
+      animation: pawRub 0.3s infinite alternate ease-in-out;
     }
-    
-    @keyframes wag {
-      0% { transform: rotate(10deg); }
-      100% { transform: rotate(30deg); }
-    }
+    .licking .cat-paw-rest.right { opacity: 0; } /* Giấu 1 chân đi lúc đang liếm */
+
     @keyframes lickAnim {
       from { transform: translateX(-50%) scaleY(1); }
       to { transform: translateX(-50%) scaleY(1.4); }
     }
-    @keyframes pawAnim {
-      from { transform: translateY(-30px) translateX(10px) rotate(40deg); }
-      to { transform: translateY(-35px) translateX(12px) rotate(45deg); }
+    @keyframes pawRub {
+      from { transform: translateY(15px) rotate(-15deg); }
+      to { transform: translateY(-5px) rotate(15deg); }
     }
 
     /* ============================================
@@ -355,10 +381,12 @@
     .polaroid:nth-child(2) { transform: rotate(3deg); margin-top: 30px; }
     .polaroid:nth-child(3) { transform: rotate(-2deg); }
     .polaroid:hover { transform: scale(1.1) rotate(0deg); z-index: 10; }
+    
     .polaroid-img {
       width: 100%; height: 180px; background: #ddd; border: 1px solid #999;
-      display: flex; align-items: center; justify-content: center; font-size: 3rem;
+      display: flex; align-items: center; justify-content: center; font-size: 3rem; overflow: hidden;
     }
+    .polaroid-img img { width: 100%; height: 100%; object-fit: cover; }
     .polaroid-caption { font-family: 'Fredoka', cursive; text-align: center; margin-top: 10px; font-weight: 600; font-size: 0.9rem; }
 
     /* ============================================
@@ -373,8 +401,9 @@
     .project-img {
       width: 100%; height: 250px; background: var(--nj-blue); border: 3px solid var(--nj-black); 
       border-radius: 15px; display: flex; align-items: center; justify-content: center;
-      font-size: 4rem; box-shadow: inset 4px 4px 0px rgba(0,0,0,0.1);
+      font-size: 4rem; box-shadow: inset 4px 4px 0px rgba(0,0,0,0.1); overflow: hidden;
     }
+    .project-img img { width: 100%; height: 100%; object-fit: cover; }
     .project-tag {
       display: inline-block; background: var(--nj-pink); color: var(--nj-white);
       font-family: var(--font-bubbly); padding: 5px 10px; border-radius: 10px;
@@ -393,7 +422,7 @@
       body { cursor: auto; }
       .cursor { display: none; }
       #particles-container { display: none; }
-      #cyber-cat { display: none; } /* Ẩn mèo trên mobile để tránh vướng màn hình */
+      #cyber-cat { display: none; } /* Ẩn mèo trên đt cho đỡ vướng */
     }
   </style>
 </head>
@@ -405,21 +434,23 @@
 
   <div id="cyber-cat">
     <div class="cat-tail"></div>
-    <div class="cat-ear left"></div>
-    <div class="cat-ear right"></div>
-    <div class="cat-body"></div>
-    <div class="cat-head">
-      <div class="cat-blush left"></div>
-      <div class="cat-blush right"></div>
+    <div class="cat-body">
+      <div class="cat-ear left"></div>
+      <div class="cat-ear right"></div>
       <div class="cat-eye left"><div class="cat-pupil" id="pupil-l"></div></div>
       <div class="cat-eye right"><div class="cat-pupil" id="pupil-r"></div></div>
-      <div class="cat-mouth">w</div>
+      <div class="cat-blush left"></div>
+      <div class="cat-blush right"></div>
+      <div class="cat-nose"></div>
+      <div class="cat-mouth"></div>
       <div class="cat-tongue"></div>
+      <div class="cat-paw-rest left"></div>
+      <div class="cat-paw-rest right"></div>
+      <div class="cat-paw-licking"></div>
     </div>
-    <div class="cat-paw-fg"></div>
   </div>
 
-  <audio id="bg-music" src="getup.mp3"></audio>
+  <audio id="bg-music"></audio>
 
   <div class="sticker draggable" id="stk-1">🦋</div>
   <div class="sticker draggable" id="stk-2">💿</div>
@@ -532,55 +563,51 @@
     </div>
   </section>
 
-<section id="contact" style="text-align: center; padding-bottom: 10rem;">
+  <section id="contact" style="text-align: center; padding-bottom: 10rem;">
     <h2 class="section-title sticker-text pink">LET'S CHAT!</h2>
     <p style="font-weight: 600; margin-bottom: 2rem;">Always open for exciting opportunities or just a fun chat about K-pop! 🎶</p>
     
     <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-      
       <div class="btn-magnetic-wrap">
         <a href="mailto:phamailinhbn@gmail.com" class="btn hover-target magnetic" style="background: var(--nj-white); padding: 0.8rem 2rem; font-size: 1rem;">💌 EMAIL ME</a>
       </div>
-
       <div class="btn-magnetic-wrap">
         <a href="https://www.linkedin.com/in/linh-pham-bb7b153a8/" target="_blank" class="btn hover-target magnetic" style="background: var(--nj-blue); padding: 0.8rem 2rem; font-size: 1rem;">💼 LINKEDIN</a>
       </div>
-
       <div class="btn-magnetic-wrap">
         <a href="https://www.facebook.com/linhxinhdephaha" target="_blank" class="btn hover-target magnetic" style="background: var(--nj-pink); padding: 0.8rem 2rem; font-size: 1rem;">✨ FACEBOOK</a>
       </div>
-
     </div>
   </section>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       
-      // Khai báo các thành phần của bé mèo
+      // LOGIC MẮT MÈO NHÌN THEO CHUỘT
       const pupilL = document.getElementById('pupil-l');
       const pupilR = document.getElementById('pupil-r');
       const cyberCat = document.getElementById('cyber-cat');
 
-      // 1. MAGNETIC CURSOR & MOUSE TRACKING
       const cursor = document.getElementById('cursor');
       if (window.matchMedia("(pointer: fine)").matches) {
         document.addEventListener('mousemove', e => {
-          
-          // Di chuyển con trỏ chuột
+          // Di chuyển con trỏ
           requestAnimationFrame(() => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
           });
 
-          // LOGIC MẮT MÈO NHÌN THEO CHUỘT
+          // Toán học để mắt mèo lia theo
           function movePupil(pupil, mouseX, mouseY) {
             if (!pupil) return;
             const rect = pupil.getBoundingClientRect();
+            // Lấy tâm con mắt
             const eyeX = rect.left + rect.width / 2;
             const eyeY = rect.top + rect.height / 2;
             
+            // Tính góc và giới hạn khoảng cách (Tối đa 6px để lòng đen không rớt ra ngoài)
             const angle = Math.atan2(mouseY - eyeY, mouseX - eyeX);
-            const maxDist = 3; // Giới hạn khoảng cách tròng mắt di chuyển
+            const maxDist = 6; 
             
             const tx = Math.cos(angle) * maxDist;
             const ty = Math.sin(angle) * maxDist;
@@ -598,17 +625,18 @@
         });
       }
 
-      // LOGIC MÈO TỰ ĐỘNG LIẾM LÔNG
+      // LOGIC MÈO LIẾM LÔNG NGẪU NHIÊN
       setInterval(() => {
-        if (Math.random() > 0.6) { // 40% tỷ lệ mèo sẽ liếm lông mỗi 5 giây
+        // Tỷ lệ 50% mèo sẽ liếm lông mỗi 6 giây
+        if (Math.random() > 0.5) { 
           cyberCat.classList.add('licking');
           setTimeout(() => {
             cyberCat.classList.remove('licking');
-          }, 2000); // Hành động diễn ra trong 2 giây
+          }, 2500); // Hành động diễn ra trong 2.5 giây
         }
-      }, 5000);
+      }, 6000);
 
-      // 2. MAGNETIC BUTTON
+      // MAGNETIC BUTTON
       const magnets = document.querySelectorAll('.magnetic');
       magnets.forEach(magnet => {
         magnet.addEventListener('mousemove', function(e) {
@@ -622,7 +650,7 @@
         });
       });
 
-      // 3. DRAGGABLE STICKERS
+      // DRAGGABLE STICKERS
       const draggables = document.querySelectorAll('.draggable');
       draggables.forEach(el => {
         let isDragging = false, currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
@@ -655,7 +683,7 @@
         }
       });
 
-      // 4. FUNCTIONAL MP3 PLAYER (PLAYLIST)
+      // FUNCTIONAL MP3 PLAYER
       const audio = document.getElementById('bg-music');
       const playBtn = document.getElementById('play-btn');
       const prevBtn = document.getElementById('prev-btn');
@@ -673,14 +701,12 @@
 
       function loadTrack(index) {
         audio.src = playlist[index].src;
-        audio.load(); // BẮT BUỘC: Ép trình duyệt tải file nhạc mới
+        audio.load();
 
         if (isPlaying) {
           let playPromise = audio.play();
           if (playPromise !== undefined) {
-            playPromise.catch(error => {
-              console.log("Audio play error:", error);
-            });
+            playPromise.catch(error => console.log("Audio play error:", error));
           }
           playBtn.innerHTML = '⏸';
           mp3Text.innerHTML = `▶ NOW PLAYING: ${playlist[index].title}`;
@@ -696,11 +722,10 @@
           playBtn.innerHTML = '▶';
           mp3Text.innerHTML = `⏸ Paused: ${playlist[currentTrack].title}`;
         } else {
+          if (!audio.src || audio.src === window.location.href) loadTrack(currentTrack);
           let playPromise = audio.play();
           if (playPromise !== undefined) {
-            playPromise.catch(error => {
-              console.log("Audio play error:", error);
-            });
+            playPromise.catch(error => console.log("Audio play error:", error));
           }
           playBtn.innerHTML = '⏸';
           mp3Text.innerHTML = `▶ NOW PLAYING: ${playlist[currentTrack].title}`;
@@ -732,7 +757,7 @@
         playBtn.innerHTML = '▶';
       });
       
-      // 5. Y2K FLOATING PARTICLES
+      // FLOATING PARTICLES
       const container = document.getElementById('particles-container');
       const shapes = ['✨', '💖', '⭐', '🫧', '🦋', '🎵'];
       
@@ -741,13 +766,11 @@
         p.classList.add('particle');
         p.innerText = shapes[Math.floor(Math.random() * shapes.length)];
         
-
         p.style.left = Math.random() * 100 + 'vw';
         p.style.animationDuration = (Math.random() * 7 + 5) + 's';
         p.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
         
         container.appendChild(p);
-        
         setTimeout(() => p.remove(), 12000);
       }
       
