@@ -3,486 +3,417 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Name — Digital Strategist</title>
+  <title>Your Name — Y2K Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Syncopate:wght@400;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&family=VT323&display=swap" rel="stylesheet"/>
 
   <style>
     /* ============================================
-       REFINED AESPA x EDITORIAL TOKENS
+       NEWJEANS CORE TOKENS
     ============================================ */
     :root {
-      --bg-main:    #030305; /* Đen tuyền bí ẩn */
-      --bg-card:    #0a0a10; /* Đen xám cho các thẻ */
-      --text-main:  #E2E8F0; /* Trắng sáng */
-      --text-muted: #8B949E; /* Xám tech */
+      --nj-blue:    #a0cfff; /* Xanh bầu trời */
+      --nj-green:   #b2f252; /* Xanh lá mạ NewJeans */
+      --nj-pink:    #ff9ce6; /* Hồng Y2K */
+      --nj-white:   #ffffff;
+      --nj-black:   #1a1a1a;
       
-      --aespa-purple: #a114ff;
-      --aespa-cyan:   #00f2fe;
-      --aespa-pink:   #ff0055;
-      
-      --font-heading: 'Syncopate', sans-serif;
-      --font-body:    'Chakra Petch', sans-serif;
-      --spring:       cubic-bezier(0.25, 1, 0.5, 1);
+      --font-bubbly: 'Fredoka', sans-serif;
+      --font-text:   'Nunito', sans-serif;
+      --font-pixel:  'VT323', monospace;
+      --spring:      cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     /* ============================================
-       RESET & BASE
+       RESET & BASE (Y2K VIBE)
     ============================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: var(--font-body);
-      background-color: var(--bg-main);
-      color: var(--text-main);
+      font-family: var(--font-text);
+      /* Background gradient xanh pastel + chấm bi mờ */
+      background: 
+        radial-gradient(circle at 50% 0%, #d5e8fe 0%, #a0cfff 100%);
+      background-attachment: fixed;
+      color: var(--nj-black);
       line-height: 1.6;
       overflow-x: hidden;
-      cursor: none; /* Sử dụng custom cursor */
+      cursor: none;
     }
-    a, button { cursor: none; text-decoration: none; color: inherit; }
-    ul { list-style: none; }
+    a, button { cursor: none; text-decoration: none; color: inherit; font-family: inherit;}
+
+    /* Lưới Caro mờ phong cách sổ tay */
+    body::before {
+      content: '';
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px);
+      background-size: 30px 30px;
+      z-index: -1; pointer-events: none;
+    }
 
     /* ============================================
-       CUSTOM MAGNETIC CURSOR (CYBER STYLE)
+       MAGNETIC BUBBLE CURSOR
     ============================================ */
-    .custom-cursor {
+    .cursor {
       position: fixed; top: 0; left: 0;
-      width: 8px; height: 8px;
-      background-color: var(--aespa-cyan);
+      width: 16px; height: 16px;
+      background-color: var(--nj-pink);
+      border: 2px solid var(--nj-black);
       border-radius: 50%; pointer-events: none; z-index: 9999;
       transform: translate(-50%, -50%);
-      transition: width 0.2s, height 0.2s, background-color 0.3s;
-      box-shadow: 0 0 10px var(--aespa-cyan);
-    }
-    .custom-cursor-follower {
-      position: fixed; top: 0; left: 0;
-      width: 36px; height: 36px;
-      border: 1px solid rgba(0, 242, 254, 0.4);
-      border-radius: 50%; pointer-events: none; z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: width 0.4s var(--spring), height 0.4s var(--spring), border-color 0.4s, background-color 0.4s;
+      transition: width 0.3s var(--spring), height 0.3s var(--spring), background-color 0.3s;
+      box-shadow: 2px 2px 0px var(--nj-black);
     }
     
-    body.cursor-hover .custom-cursor { width: 0; height: 0; }
-    body.cursor-hover .custom-cursor-follower {
-      width: 60px; height: 60px;
-      background-color: rgba(161, 20, 255, 0.1);
-      border-color: var(--aespa-purple);
-      box-shadow: 0 0 20px rgba(161, 20, 255, 0.3);
+    body.cursor-hover .cursor {
+      width: 50px; height: 50px;
+      background-color: var(--nj-green);
+      mix-blend-mode: normal;
+      opacity: 0.8;
+      border-width: 3px;
     }
-    body.cursor-text .custom-cursor {
-      width: 4px; height: 40px; border-radius: 2px;
-      background-color: var(--aespa-cyan);
-    }
-    body.cursor-text .custom-cursor-follower { opacity: 0; }
 
     /* ============================================
-       SUBTLE BACKGROUND ORB (AESPA GLOW)
+       STICKER TEXT EFFECT (NEWJEANS STYLE)
     ============================================ */
-    .bg-orb {
-      position: fixed; top: -20%; right: -10%;
-      width: 50vw; height: 50vw; border-radius: 50%;
-      background: radial-gradient(circle, rgba(161,20,255,0.15) 0%, rgba(0,242,254,0.05) 50%, rgba(0,0,0,0) 70%);
-      filter: blur(80px); z-index: -1;
-      animation: floatOrb 20s ease-in-out infinite alternate;
-      pointer-events: none;
+    .sticker-text {
+      font-family: var(--font-bubbly);
+      color: var(--nj-white);
+      /* Viền đen và đổ bóng cứng đặc trưng */
+      -webkit-text-stroke: 2px var(--nj-black);
+      text-shadow: 4px 4px 0px var(--nj-black);
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
-    @keyframes floatOrb {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(-5vw, 10vh) scale(1.1); }
+    .sticker-text.green { color: var(--nj-green); }
+    .sticker-text.pink { color: var(--nj-pink); }
+
+    /* ============================================
+       DRAGGABLE Y2K STICKERS
+    ============================================ */
+    .sticker {
+      position: absolute;
+      font-size: 4rem;
+      cursor: grab;
+      user-select: none;
+      z-index: 50;
+      filter: drop-shadow(3px 3px 0px var(--nj-black));
+      transition: transform 0.2s;
     }
+    .sticker:active { cursor: grabbing; transform: scale(1.1) rotate(5deg); }
+    
+    /* Vị trí ban đầu của các sticker */
+    #stk-1 { top: 15%; left: 10%; transform: rotate(-15deg); }
+    #stk-2 { top: 60%; right: 15%; transform: rotate(10deg); font-size: 5rem;}
+    #stk-3 { top: 80%; left: 20%; transform: rotate(-5deg); font-size: 3.5rem;}
+    #stk-4 { top: 25%; right: 10%; transform: rotate(20deg); }
+
+    /* ============================================
+       RETRO MP3 PLAYER WIDGET
+    ============================================ */
+    .mp3-player {
+      position: fixed; bottom: 30px; left: 30px;
+      width: 260px; background: #e0e0e0;
+      border: 3px solid var(--nj-black);
+      border-radius: 15px;
+      box-shadow: 6px 6px 0px var(--nj-black);
+      z-index: 100;
+      padding: 10px;
+      cursor: grab;
+    }
+    .mp3-player:active { cursor: grabbing; }
+    .mp3-header {
+      font-family: var(--font-bubbly); font-size: 0.9rem;
+      text-align: center; border-bottom: 2px solid var(--nj-black);
+      padding-bottom: 5px; margin-bottom: 10px; background: var(--nj-pink);
+      border-radius: 10px 10px 0 0; border: 2px solid var(--nj-black);
+    }
+    .mp3-screen {
+      background: #8b9bb4; border: 3px inset #555;
+      padding: 8px; border-radius: 5px;
+      font-family: var(--font-pixel); color: #fff; font-size: 1.1rem;
+      text-shadow: 1px 1px 0px #000;
+      margin-bottom: 10px;
+    }
+    .mp3-controls { display: flex; justify-content: space-around; }
+    .mp3-btn {
+      background: var(--nj-white); border: 2px solid var(--nj-black);
+      border-radius: 50%; width: 35px; height: 35px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; box-shadow: 2px 2px 0px var(--nj-black);
+      transition: transform 0.1s;
+    }
+    .mp3-btn:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0px var(--nj-black); }
 
     /* ============================================
        NAVIGATION
     ============================================ */
     nav {
-      position: fixed; top: 0; width: 100%;
-      padding: 1.5rem 4vw; display: flex; justify-content: space-between; align-items: center;
-      z-index: 100; transition: background-color 0.3s, padding 0.3s;
+      position: fixed; top: 0; width: 100%; padding: 1.5rem 4vw;
+      display: flex; justify-content: space-between; align-items: center; z-index: 100;
     }
-    nav.scrolled {
-      background-color: rgba(3, 3, 5, 0.85);
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      padding: 1rem 4vw; border-bottom: 1px solid rgba(255,255,255,0.05);
+    .logo {
+      font-family: var(--font-bubbly); font-size: 2rem;
+      color: var(--nj-white); -webkit-text-stroke: 1px var(--nj-black);
+      text-shadow: 2px 2px 0px var(--nj-black); transform: rotate(-2deg);
     }
-    .logo { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; letter-spacing: 1px;}
-    .logo span { color: var(--aespa-cyan); text-shadow: 0 0 10px rgba(0,242,254,0.5); }
-    
-    .nav-links { display: flex; gap: 2rem; }
-    .nav-links a {
-      font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;
-      position: relative; overflow: hidden; display: inline-block; color: var(--text-muted);
-      transition: color 0.3s;
+    .nav-links {
+      background: var(--nj-white); border: 2px solid var(--nj-black);
+      border-radius: 30px; padding: 0.5rem 1.5rem;
+      display: flex; gap: 2rem; box-shadow: 4px 4px 0px var(--nj-black);
     }
-    .nav-links a:hover { color: var(--text-main); }
-    .nav-links a::after {
-      content: ''; position: absolute; bottom: 0; left: 0;
-      width: 100%; height: 1px; background-color: var(--aespa-cyan);
-      transform: translateX(-101%); transition: transform 0.3s var(--spring);
-    }
-    .nav-links a:hover::after { transform: translateX(0); }
-
-    /* ============================================
-       ANIMATIONS
-    ============================================ */
-    .fade-up {
-      opacity: 0; transform: translateY(30px);
-      transition: opacity 0.8s var(--spring), transform 0.8s var(--spring);
-    }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-    
-    .text-reveal { overflow: hidden; display: inline-block; vertical-align: top; }
-    .text-reveal span {
-      display: inline-block; opacity: 0; transform: translateY(100%);
-      transition: opacity 0.8s var(--spring), transform 0.8s var(--spring);
-    }
-    .text-reveal.visible span { opacity: 1; transform: translateY(0); }
+    .nav-links a { font-family: var(--font-bubbly); font-size: 1rem; color: var(--nj-black); transition: color 0.2s;}
+    .nav-links a:hover { color: var(--nj-pink); }
 
     /* ============================================
        HERO SECTION
     ============================================ */
-    section { padding: 8rem 4vw 4rem; position: relative; }
-    .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 12rem; }
-    .hero-content { max-width: 1200px; margin: 0 auto; width: 100%; }
-    
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; text-align: center;
+      position: relative; padding: 0 4vw;
+    }
     .badge {
-      display: inline-block; padding: 0.5rem 1.2rem;
-      border: 1px solid rgba(0,242,254,0.3); border-radius: 50px;
-      font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;
-      margin-bottom: 2rem; color: var(--aespa-cyan);
-      background: rgba(0,242,254,0.05); box-shadow: 0 0 15px rgba(0,242,254,0.1);
+      font-family: var(--font-bubbly); background: var(--nj-white);
+      border: 2px solid var(--nj-black); padding: 5px 15px; border-radius: 20px;
+      box-shadow: 3px 3px 0px var(--nj-black); margin-bottom: 2rem;
+      transform: rotate(2deg);
     }
-    
-    .hero-title {
-      font-family: var(--font-heading);
-      font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1.2; margin-bottom: 1.5rem;
-      text-transform: uppercase;
-    }
-    .hero-title em { 
-      color: transparent; -webkit-text-stroke: 1px var(--aespa-purple); font-style: normal;
-      text-shadow: 0 0 20px rgba(161,20,255,0.3);
-    }
-    
+    .hero-title { font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1.1; margin-bottom: 1rem; }
     .hero-desc {
-      font-size: clamp(1rem, 1.5vw, 1.15rem); color: var(--text-muted);
-      max-width: 600px; margin-bottom: 3rem; line-height: 1.8;
+      font-size: 1.2rem; max-width: 500px; font-weight: 700;
+      background: var(--nj-white); border: 2px dashed var(--nj-black);
+      padding: 1.5rem; border-radius: 15px; margin-bottom: 3rem;
+      box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
     }
 
+    /* Y2K Button */
     .btn-magnetic-wrap { display: inline-block; padding: 20px; margin: -20px; }
     .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      padding: 1rem 2.5rem; border-radius: 50px;
-      font-family: var(--font-heading); font-size: 0.8rem; letter-spacing: 1px;
-      transition: all 0.3s; text-transform: uppercase;
+      display: inline-block; padding: 1rem 3rem;
+      background: var(--nj-green); color: var(--nj-black);
+      font-family: var(--font-bubbly); font-size: 1.2rem;
+      border: 3px solid var(--nj-black); border-radius: 50px;
+      box-shadow: 5px 5px 0px var(--nj-black);
+      transition: transform 0.1s; text-transform: uppercase;
     }
-    .btn-primary { 
-      background: var(--text-main); color: var(--bg-main); 
-    }
-    .btn-primary:hover { 
-      background: var(--aespa-cyan); color: #000; box-shadow: 0 0 20px rgba(0,242,254,0.4);
-    }
+    .btn:hover { background: var(--nj-pink); color: var(--nj-white); }
+    .btn:active { transform: translate(4px, 4px) !important; box-shadow: 1px 1px 0px var(--nj-black); }
 
     /* ============================================
-       ABOUT & SKILLS
+       ABOUT & PROJECTS (SCRAPBOOK STYLE)
     ============================================ */
-    .section-header { margin-bottom: 4rem; }
-    .section-title { font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 3rem); text-transform: uppercase; }
-    .section-title span { color: var(--aespa-purple); }
+    section { padding: 6rem 4vw; max-width: 1200px; margin: 0 auto; }
+    .section-title { font-size: 4rem; text-align: center; margin-bottom: 4rem; transform: rotate(-2deg); }
+
+    .card {
+      background: var(--nj-white); border: 3px solid var(--nj-black);
+      border-radius: 20px; padding: 2.5rem;
+      box-shadow: 8px 8px 0px var(--nj-black);
+      margin-bottom: 3rem; position: relative;
+    }
+    /* Băng dính giả */
+    .tape {
+      position: absolute; top: -15px; left: 50%; transform: translateX(-50%) rotate(-2deg);
+      width: 120px; height: 35px; background: rgba(255,255,255,0.6);
+      border: 1px solid #ccc; box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    }
     
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-    .about-text p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1.5rem; }
-    .about-text strong { color: var(--text-main); font-weight: 600; text-shadow: 0 0 5px rgba(255,255,255,0.3); }
-    
-    .skills-container { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; }
-    .skill-pill {
-      padding: 0.6rem 1.5rem;
-      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 50px; font-weight: 500; font-size: 0.85rem; letter-spacing: 1px;
-      transition: all 0.3s var(--spring); text-transform: uppercase;
+    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .project-img {
+      width: 100%; height: 250px; background: var(--nj-blue);
+      border: 3px solid var(--nj-black); border-radius: 15px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem; box-shadow: inset 4px 4px 0px rgba(0,0,0,0.1);
     }
-    .skill-pill:hover {
-      transform: translateY(-3px); border-color: var(--aespa-purple);
-      color: #fff; box-shadow: 0 5px 15px rgba(161,20,255,0.2); background: rgba(161,20,255,0.1);
+    .project-tag {
+      display: inline-block; background: var(--nj-pink); color: var(--nj-white);
+      font-family: var(--font-bubbly); padding: 5px 10px; border-radius: 10px;
+      border: 2px solid var(--nj-black); margin-bottom: 1rem;
     }
-
-    /* ============================================
-       PROJECTS (CYBER-EDITORIAL)
-    ============================================ */
-    .projects-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
-    
-    .project-card {
-      display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center;
-      padding: 3rem; background: var(--bg-card); border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.05);
-      transition: transform 0.5s var(--spring), border-color 0.5s;
-    }
-    .project-card:hover {
-      transform: translateY(-8px); border-color: rgba(0,242,254,0.3);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-    .project-card:nth-child(even) { grid-template-columns: 1fr 1.2fr; }
-    .project-card:nth-child(even) .project-info { order: -1; }
-
-    .project-image-wrap {
-      width: 100%; height: 350px; border-radius: 12px; overflow: hidden;
-      background: #111; position: relative;
-    }
-    .project-image-placeholder {
-      width: 100%; height: 100%;
-      background: linear-gradient(135deg, rgba(161,20,255,0.2), rgba(0,242,254,0.2));
-      transition: transform 0.5s var(--spring);
-    }
-    .project-card:hover .project-image-placeholder { transform: scale(1.05); opacity: 0.8; }
-
-    .project-tag { 
-      color: var(--aespa-cyan); font-family: var(--font-heading); font-size: 0.7rem; 
-      text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem; display: block;
-    }
-    .project-title { font-family: var(--font-heading); font-size: 2rem; margin-bottom: 1rem; text-transform: uppercase; }
-    .project-desc { color: var(--text-muted); margin-bottom: 2rem; }
-    .project-link { 
-      display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; 
-      color: var(--text-main); border-bottom: 1px solid var(--aespa-cyan); padding-bottom: 2px;
-      transition: gap 0.3s, color 0.3s; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;
-    }
-    .project-card:hover .project-link { gap: 1rem; color: var(--aespa-cyan); }
-
-    /* ============================================
-       MARQUEE (SYNC MODE)
-    ============================================ */
-    .marquee {
-      padding: 2rem 0; overflow: hidden; background: var(--aespa-purple); color: #fff;
-      margin: 4rem 0; transform: rotate(-1deg) scale(1.02); box-shadow: 0 0 20px rgba(161,20,255,0.2);
-    }
-    .marquee-content { display: flex; width: max-content; animation: marqueeScroll 15s linear infinite; }
-    .marquee-text {
-      font-family: var(--font-heading); font-size: 1.5rem; text-transform: uppercase;
-      padding: 0 2rem; display: flex; align-items: center; gap: 2rem; letter-spacing: 2px;
-    }
-    .marquee-star { color: #000; }
-    @keyframes marqueeScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-    /* ============================================
-       CONTACT
-    ============================================ */
-    .contact { text-align: center; padding: 8rem 4vw; background: var(--bg-card); border-top: 1px solid rgba(255,255,255,0.05); }
-    .contact h2 { font-family: var(--font-heading); font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 2rem; text-transform: uppercase; }
-    .contact h2 em { color: var(--aespa-pink); font-style: normal; text-shadow: 0 0 15px rgba(255,0,85,0.4); }
-    
-    footer { 
-      padding: 2rem 4vw; display: flex; justify-content: space-between; 
-      font-family: var(--font-heading); font-size: 0.7rem; color: var(--text-muted); 
-      border-top: 1px solid rgba(255,255,255,0.05); letter-spacing: 1px; text-transform: uppercase;
-    }
+    .project-title { font-family: var(--font-bubbly); font-size: 2rem; margin-bottom: 1rem; }
 
     /* ============================================
        RESPONSIVE
     ============================================ */
-    @media (max-width: 900px) {
-      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .project-card, .project-card:nth-child(even) { grid-template-columns: 1fr; padding: 2rem; }
-      .project-card:nth-child(even) .project-info { order: 1; }
-      .project-image-wrap { height: 200px; }
-    }
     @media (max-width: 768px) {
       .nav-links { display: none; }
+      .project-grid { grid-template-columns: 1fr; }
+      .mp3-player { bottom: 10px; left: 10px; transform: scale(0.8); }
+      .sticker { display: none; } /* Ẩn sticker trên mobile để tránh vướng */
       body { cursor: auto; }
-      .custom-cursor, .custom-cursor-follower { display: none; }
+      .cursor { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <div class="bg-orb"></div>
+  <div class="cursor" id="cursor"></div>
 
-  <div class="custom-cursor" id="cursor"></div>
-  <div class="custom-cursor-follower" id="cursor-follower"></div>
+  <div class="sticker draggable" id="stk-1">🦋</div>
+  <div class="sticker draggable" id="stk-2">💿</div>
+  <div class="sticker draggable" id="stk-3">📱</div>
+  <div class="sticker draggable" id="stk-4">⭐</div>
 
-  <nav id="navbar">
-    <div class="logo">YOUR<span>NAME</span></div>
-    <ul class="nav-links">
-      <li><a href="#about" class="hover-target">System</a></li>
-      <li><a href="#projects" class="hover-target">Archives</a></li>
-      <li><a href="#contact" class="hover-target">Connect</a></li>
-    </ul>
-  </nav>
-
-  <section class="hero">
-    <div class="hero-content">
-      <div class="badge fade-up">Digital Strategy Protocol</div>
-      
-      <h1 class="hero-title hover-text">
-        <span class="text-reveal"><span>I architect</span></span><br>
-        <span class="text-reveal"><span style="transition-delay: 0.1s">digital <em>narratives</em></span></span><br>
-        <span class="text-reveal"><span style="transition-delay: 0.2s">that connect.</span></span>
-      </h1>
-      
-      <p class="hero-desc fade-up" style="transition-delay: 0.4s">
-        A marketing student traversing into web development. 
-        I bridge the gap between creative storytelling and modern tech experiences.
-      </p>
-      
-      <div class="btn-magnetic-wrap fade-up" style="transition-delay: 0.6s">
-        <a href="#projects" class="btn btn-primary hover-target magnetic">Access Archives</a>
-      </div>
+  <div class="mp3-player draggable" id="mp3">
+    <div class="mp3-header">MY PLAYLIST .mp3</div>
+    <div class="mp3-screen">
+      <marquee scrollamount="4">▶ NOW PLAYING: TWICE - What is Love? ... ⏭ UP NEXT: Taylor Swift - Cruel Summer</marquee>
     </div>
-  </section>
-
-  <div class="marquee">
-    <div class="marquee-content">
-      <div class="marquee-text">Creative Strategy <span class="marquee-star">✦</span> Cyber Aesthetics <span class="marquee-star">✦</span> Brand Identity <span class="marquee-star">✦</span> Web Design <span class="marquee-star">✦</span></div>
-      <div class="marquee-text">Creative Strategy <span class="marquee-star">✦</span> Cyber Aesthetics <span class="marquee-star">✦</span> Brand Identity <span class="marquee-star">✦</span> Web Design <span class="marquee-star">✦</span></div>
+    <div class="mp3-controls">
+      <div class="mp3-btn hover-target">⏮</div>
+      <div class="mp3-btn hover-target" style="background: var(--nj-green);">▶</div>
+      <div class="mp3-btn hover-target">⏭</div>
     </div>
   </div>
 
-  <section id="about">
-    <div class="section-header fade-up">
-      <h2 class="section-title hover-text">Core <span>Mindset</span></h2>
+  <nav>
+    <div class="logo">YOUR NAME</div>
+    <div class="nav-links">
+      <a href="#about" class="hover-target">ABOUT</a>
+      <a href="#projects" class="hover-target">PROJECTS</a>
+      <a href="#contact" class="hover-target">CONTACT</a>
     </div>
+  </nav>
+
+  <section class="hero">
+    <div class="badge">EST. 2005</div>
+    <h1 class="hero-title sticker-text green">CREATIVE</h1>
+    <h1 class="hero-title sticker-text pink" style="margin-top: -20px;">MARKETER</h1>
     
-    <div class="about-grid">
-      <div class="about-text">
-        <p class="fade-up">
-          I didn't enter marketing just for campaigns. I entered it because I am fascinated by the <strong>psychology behind choices</strong>.
-        </p>
-        <p class="fade-up">
-          Understanding marketing taught me the "why". Learning web development gave me the tools to build the <strong>"how"</strong>.
-        </p>
-        <p class="fade-up">
-          The best brands in the digital era don't just sell; they invite users into a seamlessly engineered universe.
-        </p>
-      </div>
-      
-      <div class="skills-container fade-up">
-        <div class="skill-pill hover-target">Brand Identity</div>
-        <div class="skill-pill hover-target">Consumer Behavior</div>
-        <div class="skill-pill hover-target">UI / UX Design</div>
-        <div class="skill-pill hover-target">Figma</div>
-        <div class="skill-pill hover-target">HTML & CSS</div>
-        <div class="skill-pill hover-target">JavaScript</div>
-      </div>
+    <div class="hero-desc">
+      Hi! I'm a Marketing Communications student at UFM. 
+      I love turning ideas into colorful digital experiences! 🌸✨
+    </div>
+
+    <div class="btn-magnetic-wrap">
+      <a href="#projects" class="btn hover-target magnetic">VIEW ARCHIVES</a>
     </div>
   </section>
 
   <section id="projects">
-    <div class="section-header fade-up">
-      <h2 class="section-title hover-text">Selected <span>Works</span></h2>
+    <h2 class="section-title sticker-text">MY WORK</h2>
+
+    <div class="card">
+      <div class="tape"></div>
+      <div class="project-grid">
+        <div class="project-img">☕</div>
+        <div>
+          <div class="project-tag">BRANDING</div>
+          <h3 class="project-title">Local Café Rebrand</h3>
+          <p>Redesigned the entire brand identity for a local café to attract Gen Z customers. Created a fresh, bubbly aesthetic that boosted engagement.</p>
+        </div>
+      </div>
     </div>
 
-    <div class="projects-grid">
-      <article class="project-card fade-up hover-target">
-        <div class="project-image-wrap">
-          <div class="project-image-placeholder"></div>
+    <div class="card" style="transform: rotate(1deg);">
+      <div class="tape" style="transform: translateX(-50%) rotate(2deg);"></div>
+      <div class="project-grid" style="direction: rtl;">
+        <div class="project-img" style="background: var(--nj-green);">💻</div>
+        <div style="direction: ltr;">
+          <div class="project-tag" style="background: var(--nj-blue);">WEB DEV</div>
+          <h3 class="project-title">Y2K Portfolio</h3>
+          <p>Coded this entire portfolio from scratch using HTML, CSS, and JS! I wanted a space that feels like my personal digital diary.</p>
         </div>
-        <div class="project-info">
-          <span class="project-tag">Brand Strategy</span>
-          <h3 class="project-title">Local Rebrand</h3>
-          <p class="project-desc">A complete visual and strategic refresh focusing on community. Analyzed competitor positioning to architect a modern identity system.</p>
-          <a href="#" class="project-link">View Data Log -></a>
-        </div>
-      </article>
-
-      <article class="project-card fade-up hover-target">
-        <div class="project-info">
-          <span class="project-tag">Web Development</span>
-          <h3 class="project-title">SYNK Portfolio</h3>
-          <p class="project-desc">Built from the ground up utilizing HTML, CSS, and vanilla JavaScript. Designed to reflect a fusion of editorial layout and cyberpunk aesthetics.</p>
-          <a href="#" class="project-link">View Data Log -></a>
-        </div>
-        <div class="project-image-wrap">
-          <div class="project-image-placeholder" style="background: linear-gradient(135deg, rgba(255,0,85,0.2), rgba(161,20,255,0.2));"></div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section id="contact" class="contact">
-    <div class="fade-up">
-      <h2 class="hover-text">Initiate <em>Sync</em></h2>
-      <div class="btn-magnetic-wrap">
-        <a href="mailto:your@email.com" class="btn btn-primary hover-target magnetic">Establish Connection</a>
       </div>
     </div>
   </section>
 
-  <footer>
-    <div>© 2026 YOUR NAME</div>
-    <div>System Online ✦</div>
-  </footer>
+  <section id="contact" style="text-align: center; padding-bottom: 10rem;">
+    <h2 class="section-title sticker-text pink">LET'S CHAT!</h2>
+    <div class="btn-magnetic-wrap">
+      <a href="mailto:your@email.com" class="btn hover-target magnetic" style="background: var(--nj-white);">SEND MESSAGE 💌</a>
+    </div>
+  </section>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       
-      // 1. Custom Cursor Logic
+      // 1. MAGNETIC CURSOR LOGIC
       const cursor = document.getElementById('cursor');
-      const follower = document.getElementById('cursor-follower');
-      let mx = 0, my = 0, rx = 0, ry = 0;
-
+      
       if (window.matchMedia("(pointer: fine)").matches) {
         document.addEventListener('mousemove', e => {
-          mx = e.clientX; my = e.clientY;
-          cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+          // Add a slight delay for a smoother, floaty feel
+          requestAnimationFrame(() => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+          });
         });
-        
-        const loop = () => {
-          rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15;
-          follower.style.left = rx + 'px'; follower.style.top = ry + 'px';
-          requestAnimationFrame(loop);
-        };
-        loop();
 
-        // Hover States for Cursor
-        document.querySelectorAll('.hover-target, a, button').forEach(el => {
+        document.querySelectorAll('.hover-target').forEach(el => {
           el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
           el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
         });
-        document.querySelectorAll('.hover-text').forEach(el => {
-          el.addEventListener('mouseenter', () => document.body.classList.add('cursor-text'));
-          el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-text'));
-        });
       }
 
-      // 2. Navbar Scroll Effect
-      const navbar = document.getElementById('navbar');
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) navbar.classList.add('scrolled');
-        else navbar.classList.remove('scrolled');
-      });
-
-      // 3. Magnetic Button Effect
+      // 2. MAGNETIC BUTTON EFFECT
       const magnets = document.querySelectorAll('.magnetic');
       magnets.forEach(magnet => {
         magnet.addEventListener('mousemove', function(e) {
           const rect = this.getBoundingClientRect();
           const x = e.clientX - rect.left - rect.width / 2;
           const y = e.clientY - rect.top - rect.height / 2;
-          this.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+          this.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
         });
         magnet.addEventListener('mouseleave', function() {
           this.style.transform = 'translate(0px, 0px)';
         });
       });
 
-      // 4. Scroll Reveal (Intersection Observer)
-      const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
+      // 3. DRAGGABLE ELEMENTS (Stickers & MP3 Player)
+      const draggables = document.querySelectorAll('.draggable');
+      
+      draggables.forEach(el => {
+        let isDragging = false;
+        let currentX;
+        let currentY;
+        let initialX;
+        let initialY;
+        let xOffset = 0;
+        let yOffset = 0;
+
+        el.addEventListener("mousedown", dragStart);
+        document.addEventListener("mouseup", dragEnd);
+        document.addEventListener("mousemove", drag);
+
+        function dragStart(e) {
+          initialX = e.clientX - xOffset;
+          initialY = e.clientY - yOffset;
+          if (e.target === el || el.contains(e.target)) {
+            isDragging = true;
+            // Bring to front
+            draggables.forEach(d => d.style.zIndex = "50");
+            el.style.zIndex = "101"; 
           }
-        });
-      }, observerOptions);
+        }
 
-      document.querySelectorAll('.fade-up, .text-reveal').forEach(el => {
-        observer.observe(el);
+        function dragEnd() {
+          initialX = currentX;
+          initialY = currentY;
+          isDragging = false;
+        }
+
+        function drag(e) {
+          if (isDragging) {
+            e.preventDefault();
+            currentX = e.clientX - initialX;
+            currentY = e.clientY - initialY;
+            xOffset = currentX;
+            yOffset = currentY;
+            // Preserve existing rotations for stickers by checking IDs
+            let rotation = "";
+            if(el.id === "stk-1") rotation = "rotate(-15deg)";
+            if(el.id === "stk-2") rotation = "rotate(10deg)";
+            if(el.id === "stk-3") rotation = "rotate(-5deg)";
+            if(el.id === "stk-4") rotation = "rotate(20deg)";
+            
+            el.style.transform = `translate(${currentX}px, ${currentY}px) ${rotation}`;
+          }
+        }
       });
-
-      // Trigger initial animations on load
-      setTimeout(() => {
-        document.querySelectorAll('.hero .fade-up, .hero .text-reveal').forEach(el => el.classList.add('visible'));
-      }, 100);
     });
   </script>
 </body>
