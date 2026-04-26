@@ -68,7 +68,7 @@
     }
 
     /* ============================================
-       MAGNETIC CURSOR
+       MAGNETIC BUBBLE CURSOR
     ============================================ */
     .cursor {
       position: fixed; top: 0; left: 0; width: 16px; height: 16px;
@@ -138,7 +138,7 @@
     .mp3-btn:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0px var(--nj-black); }
 
     /* ============================================
-       Y2K CHUBBY CAT (VIRTUAL PET) - NÂNG CẤP XỊN SÒ
+       Y2K CHUBBY CAT (VIRTUAL PET) - NÂNG CẤP XỊN SÒ DỰA TRÊN HÌNH
     ============================================ */
     #cyber-cat {
       position: fixed;
@@ -153,7 +153,7 @@
     }
     #cyber-cat:hover { transform: translateY(-10px); }
     
-    /* Đuôi béo */
+    /* Đuôi béo ngoe nguẩy */
     .cat-tail {
       position: absolute;
       bottom: 20px; right: -20px;
@@ -166,12 +166,12 @@
       z-index: 0;
     }
     
-    /* Thân hình béo ú */
+    /* Thân hình béo ú màu trắng xám chân thật */
     .cat-body {
       position: absolute;
       bottom: 0; left: 20px;
       width: 180px; height: 140px;
-      background: var(--nj-white);
+      background: radial-gradient(circle at 70% 30%, var(--nj-white) 0%, #e0e0e0 100%); /* Màu trắng xám chân thật */
       border: 6px solid var(--nj-black);
       border-radius: 90px 90px 40px 40px;
       z-index: 1;
@@ -201,7 +201,7 @@
     .cat-ear.left::after { left: 15px; border-radius: 5px 20px 5px 5px; }
     .cat-ear.right::after { right: 15px; border-radius: 20px 5px 5px 5px; }
 
-    /* Mắt to tròn long lanh */
+    /* Mắt to tròn long lanh có đốm sáng Anime */
     .cat-eye {
       position: absolute; top: 50px;
       width: 40px; height: 40px;
@@ -221,7 +221,7 @@
       background: var(--nj-black);
       border-radius: 50%;
     }
-    .cat-pupil::after { /* Đốm sáng Anime */
+    .cat-pupil::after { /* Đốm sáng Anime chân thật */
       content: ''; position: absolute;
       top: 3px; left: 3px; width: 8px; height: 8px;
       background: var(--nj-white); border-radius: 50%;
@@ -238,7 +238,7 @@
     .cat-blush.left { left: 15px; }
     .cat-blush.right { right: 15px; }
     
-    /* Mũi & Miệng chúm chím :3 */
+    /* Mũi & Miệng chúm chím :3 đúng như hình */
     .cat-nose {
       position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
       width: 12px; height: 8px; background: var(--nj-pink);
@@ -255,7 +255,7 @@
     .cat-mouth::before { border-left: 4px solid var(--nj-black); transform: rotate(-20deg); margin-right: -2px; }
     .cat-mouth::after { border-right: 4px solid var(--nj-black); transform: rotate(20deg); margin-left: -2px; }
 
-    /* Chân nghỉ ngơi */
+    /* Chân nghỉ ngơi nằm tĩnh */
     .cat-paw-rest {
       position: absolute; bottom: -5px;
       width: 40px; height: 30px;
@@ -266,7 +266,7 @@
     .cat-paw-rest.left { left: 40px; }
     .cat-paw-rest.right { right: 40px; }
 
-    /* Lưỡi và Chân lúc liếm lông (Ẩn đi theo mặc định) */
+    /* Lưỡi và Chân lúc liếm lông (Ẩn đi) */
     .cat-tongue {
       position: absolute; top: 92px; left: 50%; transform: translateX(-50%) scaleY(0);
       transform-origin: top; width: 14px; height: 18px; background: var(--nj-pink);
@@ -280,7 +280,7 @@
     }
 
     /* ============================================
-       ANIMATION TRẠNG THÁI MÈO
+       ANIMATION TRẠNG THÁI MÈO (LIẾM LÔNG)
     ============================================ */
     @keyframes wag {
       0% { transform: rotate(5deg); }
@@ -295,7 +295,7 @@
       opacity: 1;
       animation: pawRub 0.3s infinite alternate ease-in-out;
     }
-    .licking .cat-paw-rest.right { opacity: 0; } /* Giấu 1 chân đi lúc đang liếm */
+    .licking .cat-paw-rest.right { opacity: 0; } /* Giấu 1 chân đi */
 
     @keyframes lickAnim {
       from { transform: translateX(-50%) scaleY(1); }
@@ -386,6 +386,7 @@
       width: 100%; height: 180px; background: #ddd; border: 1px solid #999;
       display: flex; align-items: center; justify-content: center; font-size: 3rem; overflow: hidden;
     }
+    /* Style cho ảnh thật chèn vào polaroid */
     .polaroid-img img { width: 100%; height: 100%; object-fit: cover; }
     .polaroid-caption { font-family: 'Fredoka', cursive; text-align: center; margin-top: 10px; font-weight: 600; font-size: 0.9rem; }
 
@@ -507,18 +508,28 @@
       </div>
 
       <div class="scrapbook">
+        
         <div class="polaroid hover-target">
-          <div class="polaroid-img" style="background: #ffccda;">📸</div>
+          <div class="polaroid-img" style="background: #ffccda;">
+            📸 
+          </div>
           <div class="polaroid-caption">Me at UFM!</div>
         </div>
+
         <div class="polaroid hover-target">
-          <div class="polaroid-img" style="background: #cbf078;">🌿</div>
+          <div class="polaroid-img" style="background: #cbf078;">
+            🌿
+          </div>
           <div class="polaroid-caption">Công ty Tâm Anh</div>
         </div>
+
         <div class="polaroid hover-target">
-          <div class="polaroid-img" style="background: #a0cfff;">💻</div>
+          <div class="polaroid-img" style="background: #a0cfff;">
+            💻
+          </div>
           <div class="polaroid-caption">Coding late night</div>
         </div>
+
       </div>
     </div>
   </section>
@@ -529,7 +540,9 @@
     <div class="card">
       <div class="tape"></div>
       <div class="project-grid">
-        <div class="project-img">✨</div>
+        <div class="project-img">
+           ✨
+        </div>
         <div>
           <div class="project-tag">CONTENT & PR</div>
           <h3 class="project-title">Công ty Tâm Anh</h3>
@@ -541,7 +554,9 @@
     <div class="card" style="transform: rotate(1deg);">
       <div class="tape" style="transform: translateX(-50%) rotate(2deg);"></div>
       <div class="project-grid" style="direction: rtl;">
-        <div class="project-img" style="background: var(--nj-green);">📊</div>
+        <div class="project-img" style="background: var(--nj-green);">
+          📊
+        </div>
         <div style="direction: ltr;">
           <div class="project-tag" style="background: var(--nj-blue);">STRATEGY</div>
           <h3 class="project-title">Market Entry Analysis</h3>
@@ -553,7 +568,9 @@
     <div class="card" style="transform: rotate(-1deg);">
       <div class="tape" style="transform: translateX(-50%) rotate(-3deg);"></div>
       <div class="project-grid">
-        <div class="project-img" style="background: var(--nj-pink);">🌐</div>
+        <div class="project-img" style="background: var(--nj-pink);">
+          🌐
+        </div>
         <div>
           <div class="project-tag" style="background: var(--nj-black); color: white;">WEB DEV</div>
           <h3 class="project-title">Y2K Portfolio</h3>
@@ -568,22 +585,26 @@
     <p style="font-weight: 600; margin-bottom: 2rem;">Always open for exciting opportunities or just a fun chat about K-pop! 🎶</p>
     
     <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+      
       <div class="btn-magnetic-wrap">
         <a href="mailto:phamailinhbn@gmail.com" class="btn hover-target magnetic" style="background: var(--nj-white); padding: 0.8rem 2rem; font-size: 1rem;">💌 EMAIL ME</a>
       </div>
+
       <div class="btn-magnetic-wrap">
         <a href="https://www.linkedin.com/in/linh-pham-bb7b153a8/" target="_blank" class="btn hover-target magnetic" style="background: var(--nj-blue); padding: 0.8rem 2rem; font-size: 1rem;">💼 LINKEDIN</a>
       </div>
+
       <div class="btn-magnetic-wrap">
         <a href="https://www.facebook.com/linhxinhdephaha" target="_blank" class="btn hover-target magnetic" style="background: var(--nj-pink); padding: 0.8rem 2rem; font-size: 1rem;">✨ FACEBOOK</a>
       </div>
+
     </div>
   </section>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       
-      // LOGIC MẮT MÈO NHÌN THEO CHUỘT
+      // LOGIC MẮT MÈO NHÌN THEO CHUỘT (Nâng cấp)
       const pupilL = document.getElementById('pupil-l');
       const pupilR = document.getElementById('pupil-r');
       const cyberCat = document.getElementById('cyber-cat');
@@ -591,13 +612,13 @@
       const cursor = document.getElementById('cursor');
       if (window.matchMedia("(pointer: fine)").matches) {
         document.addEventListener('mousemove', e => {
-          // Di chuyển con trỏ
+          // Di chuyển con trỏ chuột
           requestAnimationFrame(() => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
           });
 
-          // Toán học để mắt mèo lia theo
+          // Toán học để mắt mèo lia theo chân thật
           function movePupil(pupil, mouseX, mouseY) {
             if (!pupil) return;
             const rect = pupil.getBoundingClientRect();
@@ -605,7 +626,7 @@
             const eyeX = rect.left + rect.width / 2;
             const eyeY = rect.top + rect.height / 2;
             
-            // Tính góc và giới hạn khoảng cách (Tối đa 6px để lòng đen không rớt ra ngoài)
+            // Tính góc và giới hạn khoảng cách (Tối đa 6px để lòng đen không rớt ra ngoài lòng trắng)
             const angle = Math.atan2(mouseY - eyeY, mouseX - eyeX);
             const maxDist = 6; 
             
@@ -625,7 +646,7 @@
         });
       }
 
-      // LOGIC MÈO LIẾM LÔNG NGẪU NHIÊN
+      // LOGIC MÈO TỰ ĐỘNG LIẾM LÔNG NGẪU NHIÊN (Nâng cấp dễ thương)
       setInterval(() => {
         // Tỷ lệ 50% mèo sẽ liếm lông mỗi 6 giây
         if (Math.random() > 0.5) { 
@@ -683,7 +704,7 @@
         }
       });
 
-      // FUNCTIONAL MP3 PLAYER
+      // FUNCTIONAL MP3 PLAYER (Đã vá lỗi xong)
       const audio = document.getElementById('bg-music');
       const playBtn = document.getElementById('play-btn');
       const prevBtn = document.getElementById('prev-btn');
@@ -691,9 +712,9 @@
       const mp3Text = document.getElementById('mp3-text');
 
       const playlist = [
-        { title: "NewJeans - Get Up 🐰", src: "getup.mp3" },
-        { title: "KiiiKiii - Delulu 🤪", src: "delulu.mp3" },
-        { title: "LNGSHOT - Never Let Go 💫", src: "neverletgo.mp3" }
+        { title: "NewJeans - Get Up 🐰✨", src: "getup.mp3" },
+        { title: "KiiiKiii - Delulu 🤪💿", src: "delulu.mp3" },
+        { title: "LNGSHOT - Never Let Go 💫📱", src: "neverletgo.mp3" }
       ];
 
       let currentTrack = 0;
@@ -701,9 +722,10 @@
 
       function loadTrack(index) {
         audio.src = playlist[index].src;
-        audio.load();
+        audio.load(); // BẮT BUỘC: Ép trình duyệt tải file nhạc mới
 
         if (isPlaying) {
+          // Xử lý an toàn để tránh lỗi Promise
           let playPromise = audio.play();
           if (playPromise !== undefined) {
             playPromise.catch(error => console.log("Audio play error:", error));
@@ -722,7 +744,10 @@
           playBtn.innerHTML = '▶';
           mp3Text.innerHTML = `⏸ Paused: ${playlist[currentTrack].title}`;
         } else {
-          if (!audio.src || audio.src === window.location.href) loadTrack(currentTrack);
+          // Bắt đầu phát từ bài đầu tiên nếu chưa có src
+          if (!audio.src || audio.src === window.location.href) {
+            loadTrack(currentTrack);
+          }
           let playPromise = audio.play();
           if (playPromise !== undefined) {
             playPromise.catch(error => console.log("Audio play error:", error));
@@ -735,22 +760,24 @@
 
       nextBtn.addEventListener('click', () => {
         currentTrack = (currentTrack + 1) % playlist.length;
-        isPlaying = true;
+        isPlaying = true; // Ép trạng thái thành Đang phát
         loadTrack(currentTrack);
       });
 
       prevBtn.addEventListener('click', () => {
         currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
-        isPlaying = true;
+        isPlaying = true; // Ép trạng thái thành Đang phát
         loadTrack(currentTrack);
       });
 
+      // Tự động chuyển bài
       audio.addEventListener('ended', () => {
         currentTrack = (currentTrack + 1) % playlist.length;
         isPlaying = true;
         loadTrack(currentTrack);
       });
 
+      // Báo lỗi file nhạc
       audio.addEventListener('error', () => {
         mp3Text.innerHTML = `⚠️ LỖI: Không tìm thấy file ${playlist[currentTrack].src}`;
         isPlaying = false;
@@ -766,6 +793,7 @@
         p.classList.add('particle');
         p.innerText = shapes[Math.floor(Math.random() * shapes.length)];
         
+        // Random vị trí và thời gian bay
         p.style.left = Math.random() * 100 + 'vw';
         p.style.animationDuration = (Math.random() * 7 + 5) + 's';
         p.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
