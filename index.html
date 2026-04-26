@@ -138,32 +138,147 @@
     .mp3-btn:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0px var(--nj-black); }
 
     /* ============================================
-       MÈO THẬT TƯƠNG TÁC (REAL CAT) - ĐÃ XÓA MẮT GIẢ
+       🐈 NEW INTERACTIVE Y2K CAT (VIRTUAL PET) 🐈
     ============================================ */
-    #real-cat {
+    #cyber-cat {
       position: fixed;
       bottom: 20px;
       right: 3vw;
-      width: 220px; 
+      width: 200px;
+      height: 180px;
       z-index: 99;
       cursor: pointer;
-      /* Điểm neo xoay ở giữa cạnh dưới để mèo lắc lư tự nhiên hơn */
-      transform-origin: center bottom;
-      transition: transform 0.15s ease-out; 
-      display: flex; flex-direction: column; align-items: center;
+      filter: drop-shadow(6px 6px 0px rgba(0,0,0,0.15));
+      transition: transform 0.3s var(--spring), filter 0.3s;
     }
     
-    #cat-img {
-      width: 100%; height: auto;
-      filter: drop-shadow(6px 6px 0px rgba(0,0,0,0.15)); 
-      transition: transform 0.3s var(--spring);
+    /* Hiệu ứng khi rê chuột vào con mèo (Hover) */
+    #cyber-cat:hover {
+      transform: translateY(-10px) scale(1.05);
+      filter: drop-shadow(10px 10px 0px var(--nj-green));
     }
-
-    #real-cat:hover #cat-img {
-      transform: scale(1.05); 
+    
+    /* Đuôi béo ú ve vẩy */
+    .cat-tail {
+      position: absolute;
+      bottom: 20px; right: -20px;
+      width: 60px; height: 80px;
+      border: 6px solid var(--nj-black);
+      border-radius: 0 40px 40px 0;
+      border-left: none; border-bottom: none;
+      transform-origin: bottom left;
+      animation: wag 3s infinite alternate ease-in-out;
+      z-index: 0;
     }
-
-    /* Bong bóng chat */
+    
+    /* Thân mèo béo ú */
+    .cat-body {
+      position: absolute;
+      bottom: 0; left: 15px;
+      width: 170px; height: 130px;
+      background: var(--nj-white);
+      border: 6px solid var(--nj-black);
+      border-radius: 90px 90px 40px 40px;
+      z-index: 1;
+      overflow: hidden;
+      transform-origin: bottom center;
+      transition: transform 0.2s var(--spring);
+    }
+    
+    /* Tai mèo cute */
+    .cat-ear {
+      position: absolute; top: -15px;
+      width: 50px; height: 50px;
+      background: var(--nj-white);
+      border: 6px solid var(--nj-black);
+      z-index: 0;
+    }
+    .cat-ear.left {
+      left: 10px; border-radius: 15px 40px 15px 15px; transform: rotate(-15deg);
+    }
+    .cat-ear.right {
+      right: 10px; border-radius: 40px 15px 15px 15px; transform: rotate(15deg);
+    }
+    .cat-ear::after { /* Lòng tai màu hồng */
+      content: ''; position: absolute;
+      width: 20px; height: 20px;
+      background: var(--nj-pink);
+    }
+    .cat-ear.left::after { left: 15px; top: 15px; border-radius: 5px 20px 5px 5px; }
+    .cat-ear.right::after { right: 15px; top: 15px; border-radius: 20px 5px 5px 5px; }
+    
+    /* Mắt to tròn long lanh - Di chuyển lòng đen theo chuột */
+    .cat-eye {
+      position: absolute; top: 40px;
+      width: 40px; height: 50px;
+      background: var(--nj-white);
+      border: 5px solid var(--nj-black);
+      border-radius: 50%;
+      overflow: hidden;
+      z-index: 2;
+      transition: height 0.1s, top 0.1s; /* Hiệu ứng nháy mắt */
+    }
+    .cat-eye.left { left: 35px; }
+    .cat-eye.right { right: 35px; }
+    
+    .cat-pupil {
+      position: absolute;
+      top: 10px; left: 10px;
+      width: 18px; height: 28px;
+      background: var(--nj-black);
+      border-radius: 50%;
+      transition: transform 0.1s linear; /* Lòng đen di chuyển mượt */
+    }
+    .cat-pupil::after { /* Đốm sáng tạo độ chân thật */
+      content: ''; position: absolute;
+      top: 5px; left: 3px; width: 6px; height: 6px;
+      background: var(--nj-white); border-radius: 50%;
+    }
+    
+    /* Má hồng & Miệng chúm chím :3 */
+    .cat-blush {
+      position: absolute; top: 80px;
+      width: 20px; height: 10px;
+      background: var(--nj-pink);
+      border-radius: 50%; opacity: 0.6;
+      z-index: 2;
+    }
+    .cat-blush.left { left: 15px; }
+    .cat-blush.right { right: 15px; }
+    
+    .cat-mouth {
+      position: absolute;
+      top: 85px; left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      font-size: 1.5rem; font-weight: bold;
+      color: var(--nj-black);
+      z-index: 2;
+    }
+    .cat-tongue { /* Lưỡi lúc liếm lông */
+      position: absolute;
+      top: 100px; left: 50%;
+      transform: translateX(-50%) scaleY(0);
+      transform-origin: top;
+      width: 15px; height: 20px;
+      background: var(--nj-pink);
+      border: 3px solid var(--nj-black);
+      border-radius: 0 0 10px 10px;
+      transition: transform 0.2s;
+      z-index: 1;
+    }
+    
+    /* Chân béo nằm bệt */
+    .cat-paw {
+      position: absolute;
+      bottom: -10px; left: 40px;
+      width: 50px; height: 40px;
+      background: var(--nj-white);
+      border: 5px solid var(--nj-black);
+      border-radius: 20px; z-index: 5;
+    }
+    
+    /* Bong bóng chat kêu meow */
     .cat-dialogue {
       position: absolute;
       top: -20px;
@@ -191,17 +306,34 @@
       border-style: solid;
       border-color: var(--nj-black) transparent transparent transparent;
     }
-
-    .cat-dialogue.show {
+    
+    /* ============================================
+       ANIMATION STATES (Javascript triggers)
+    ============================================ */
+    @keyframes wag {
+      0% { transform: rotate(5deg); }
+      100% { transform: rotate(25deg); }
+    }
+    
+    /* Hiệu ứng nháy mắt (Blink) khi click */
+    .blink .cat-eye {
+      height: 5px; top: 62.5px;
+    }
+    
+    /* Kêu Meow */
+    .meow .cat-dialogue {
       transform: translateX(-50%) scale(1);
       opacity: 1;
     }
-
-    #cat-contact {
-      position: absolute; bottom: -30px;
-      background: var(--nj-black); color: var(--nj-white);
-      font-family: var(--font-pixel); font-size: 0.9rem;
-      padding: 2px 10px; border-radius: 10px;
+    
+    /* Liếm lông ngẫu nhiên */
+    .licking .cat-tongue {
+      transform: translateX(-50%) scaleY(1);
+      animation: lickAnim 0.3s infinite alternate;
+    }
+    @keyframes lickAnim {
+      from { transform: translateX(-50%) scaleY(1); }
+      to { transform: translateX(-50%) scaleY(1.4); }
     }
 
     /* ============================================
@@ -227,17 +359,18 @@
     ============================================ */
     .hero {
       min-height: 100vh; display: flex; flex-direction: column;
-      justify-content: center; align-items: center; text-align: center; padding: 0 4vw;
+      justify-content: center; align-items: center; text-align: center; position: relative; padding: 0 4vw;
     }
     .badge {
       font-family: var(--font-bubbly); background: var(--nj-white); border: 2px solid var(--nj-black); 
       padding: 5px 15px; border-radius: 20px; box-shadow: 3px 3px 0px var(--nj-black); margin-bottom: 2rem; transform: rotate(2deg);
+      position: relative; z-index: 10;
     }
     .hero-title { font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1.1; margin-bottom: 1rem; }
     .hero-desc {
-      font-size: 1.2rem; max-width: 600px; font-weight: 700;
+      font-size: 1.2rem; max-width: 600px; font-weight: 700; position: relative; z-index: 10;
       background: var(--nj-white); border: 2px dashed var(--nj-black); padding: 1.5rem; 
-      border-radius: 15px; margin-bottom: 3rem;
+      border-radius: 15px; margin-bottom: 3rem; box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
     }
 
     .btn-magnetic-wrap { display: inline-block; padding: 20px; margin: -20px; position: relative; z-index: 10; }
@@ -252,7 +385,7 @@
     /* ============================================
        ABOUT & SCRAPBOOK
     ============================================ */
-    section { padding: 6rem 4vw; max-width: 1000px; margin: 0 auto; }
+    section { padding: 6rem 4vw; max-width: 1000px; margin: 0 auto; position: relative; z-index: 10;}
     .section-title { font-size: 4rem; text-align: center; margin-bottom: 4rem; transform: rotate(-2deg); }
     
     .about-box {
@@ -316,7 +449,7 @@
       body { cursor: auto; }
       .cursor { display: none; }
       #particles-container { display: none; }
-      #real-cat { display: none; }
+      #cyber-cat { display: none; } /* Ẩn mèo trên đt cho đỡ vướng */
     }
   </style>
 </head>
@@ -326,10 +459,22 @@
 
   <div class="cursor" id="cursor"></div>
 
-  <div id="real-cat">
+  <div id="cyber-cat">
+    <div class="cat-tail"></div>
+    <div class="cat-body">
+      <div class="cat-ear left"></div>
+      <div class="cat-ear right"></div>
+      <div class="cat-blush left"></div>
+      <div class="cat-blush right"></div>
+      
+      <div class="cat-eye left"><div class="cat-pupil" id="pupil-l"></div></div>
+      <div class="cat-eye right"><div class="cat-pupil" id="pupil-r"></div></div>
+      
+      <div class="cat-mouth">w</div>
+      <div class="cat-tongue"></div>
+    </div>
+    <div class="cat-paw"></div>
     <div class="cat-dialogue" id="cat-dialogue">Meowww~ ✨</div>
-    <img src="cat.png" alt="Mèo của Linh" id="cat-img">
-    <a href="#contact" id="cat-contact">GET LINH .txt</a>
   </div>
 
   <audio id="bg-music" src="getup.mp3"></audio>
@@ -465,34 +610,41 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       
-      // LOGIC MÈO THẬT XOAY ĐẦU (PARALLAX 3D)
-      const realCat = document.getElementById('real-cat');
+      // Khai báo các thành phần của bé mèo mới
+      const pupilL = document.getElementById('pupil-l');
+      const pupilR = document.getElementById('pupil-r');
+      const cyberCat = document.getElementById('cyber-cat');
       const catDialogue = document.getElementById('cat-dialogue');
 
+      // 1. MAGNETIC CURSOR & CAT MOUSE TRACKING
       const cursor = document.getElementById('cursor');
       if (window.matchMedia("(pointer: fine)").matches) {
         document.addEventListener('mousemove', e => {
-          // Di chuyển con trỏ chuột
+          // Di chuyển con trỏ chuột custom
           requestAnimationFrame(() => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
           });
 
-          // Toán học để tấm ảnh xoay nghiêng 3D nhìn theo chuột
-          if (realCat && !realCat.classList.contains('acting')) {
-            const rect = realCat.getBoundingClientRect();
-            // Tâm của bức ảnh
-            const catX = rect.left + rect.width / 2;
-            const catY = rect.top + rect.height / 2;
-            
-            const deltaX = e.clientX - catX;
-            const deltaY = e.clientY - catY;
-            
-            // Xoay ảnh mô phỏng việc "nhìn" theo chuột (Giới hạn góc xoay 18 độ để trông mượt)
-            const rotateY = Math.max(-18, Math.min(18, deltaX * 0.05)); // Xoay ngang
-            const rotateX = Math.max(-15, Math.min(15, -deltaY * 0.05)); // Ngước lên/xuống
-            
-            realCat.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+          // **LOGIC MỚI: CHỈ LÒNG ĐEN MẮT DI CHUYỂN THEO CHUỘT**
+          if (pupilL && pupilR) {
+            function movePupil(pupil, mouseX, mouseY) {
+              const rect = pupil.parentElement.getBoundingClientRect(); // Lấy khung tròng trắng mắt
+              const eyeX = rect.left + rect.width / 2; // Tâm mắt
+              const eyeY = rect.top + rect.height / 2;
+              
+              const angle = Math.atan2(mouseY - eyeY, mouseX - eyeX); // Tính góc nhìn
+              const maxDist = 6; // Giới hạn khoảng cách tròng đen di chuyển (6px)
+              
+              const tx = Math.cos(angle) * maxDist;
+              const ty = Math.sin(angle) * maxDist;
+              
+              // Áp dụng di chuyển cho tròng đen
+              pupil.style.transform = `translate(${tx}px, ${ty}px)`;
+            }
+
+            movePupil(pupilL, e.clientX, e.clientY);
+            movePupil(pupilR, e.clientX, e.clientY);
           }
         });
 
@@ -502,30 +654,37 @@
         });
       }
 
-      // LOGIC MÈO HÀNH ĐỘNG NGẪU NHIÊN
-      setInterval(() => {
-        // Tỷ lệ 30% mèo sẽ hành động mỗi 6 giây
-        if (Math.random() > 0.7 && realCat) { 
-          realCat.classList.add('acting');
+      // **6. HIEU UNG KHI CLICK VÀO CON MÈO**
+      if (cyberCat) {
+        cyberCat.addEventListener('click', () => {
+          // 1. Nháy mắt (Blink)
+          cyberCat.classList.add('blink');
           
-          // Mèo nhún nhảy / giật nhẹ người
-          realCat.style.transition = 'transform 0.3s var(--spring)';
-          realCat.style.transform = `perspective(600px) scale(1.08) rotate(-3deg)`;
+          // 2. Kêu Meow
+          cyberCat.classList.add('meow');
           
-          // Hiện khung chat kêu meow
-          catDialogue.classList.add('show');
-          
+          // Tắt các hiệu ứng sau khi xong
           setTimeout(() => {
-            // Trở về bình thường sau 2.5 giây
-            realCat.style.transition = 'transform 0.2s ease-out';
-            realCat.style.transform = `perspective(600px) scale(1) rotate(0deg)`;
-            catDialogue.classList.remove('show');
-            realCat.classList.remove('acting');
-          }, 2500); 
-        }
-      }, 6000);
+            cyberCat.classList.remove('blink');
+            cyberCat.classList.remove('meow');
+          }, 1500); // Hành động diễn ra trong 1.5 giây
+        });
+      }
 
-      // MAGNETIC BUTTON
+      // **7. HIEU UNG NGẪU NHIÊN (IDLE): Liếm Lông**
+      if (cyberCat) {
+        setInterval(() => {
+          // Tỷ lệ 50% mèo sẽ liếm lông mỗi 6 giây
+          if (Math.random() > 0.5 && !cyberCat.classList.contains('meow')) { 
+            cyberCat.classList.add('licking');
+            setTimeout(() => {
+              cyberCat.classList.remove('licking');
+            }, 2500); // Hành động diễn ra trong 2.5 giây
+          }
+        }, 6000);
+      }
+
+      // 2. MAGNETIC BUTTON
       const magnets = document.querySelectorAll('.magnetic');
       magnets.forEach(magnet => {
         magnet.addEventListener('mousemove', function(e) {
@@ -539,7 +698,7 @@
         });
       });
 
-      // DRAGGABLE STICKERS
+      // 3. DRAGGABLE STICKERS
       const draggables = document.querySelectorAll('.draggable');
       draggables.forEach(el => {
         let isDragging = false, currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
@@ -572,7 +731,7 @@
         }
       });
 
-      // FUNCTIONAL MP3 PLAYER
+      // 4. FUNCTIONAL MP3 PLAYER (Đã vá lỗi xong)
       const audio = document.getElementById('bg-music');
       const playBtn = document.getElementById('play-btn');
       const prevBtn = document.getElementById('prev-btn');
@@ -590,9 +749,10 @@
 
       function loadTrack(index) {
         audio.src = playlist[index].src;
-        audio.load();
+        audio.load(); // BẮT BUỘC: Ép trình duyệt tải file nhạc mới
 
         if (isPlaying) {
+          // Xử lý an toàn để tránh lỗi Promise
           let playPromise = audio.play();
           if (playPromise !== undefined) {
             playPromise.catch(error => console.log("Audio play error:", error));
@@ -611,7 +771,10 @@
           playBtn.innerHTML = '▶';
           mp3Text.innerHTML = `⏸ Paused: ${playlist[currentTrack].title}`;
         } else {
-          if (!audio.src || audio.src === window.location.href) loadTrack(currentTrack);
+          // Bắt đầu phát từ bài đầu tiên nếu chưa có src
+          if (!audio.src || audio.src === window.location.href) {
+            loadTrack(currentTrack);
+          }
           let playPromise = audio.play();
           if (playPromise !== undefined) {
             playPromise.catch(error => console.log("Audio play error:", error));
@@ -624,29 +787,31 @@
 
       nextBtn.addEventListener('click', () => {
         currentTrack = (currentTrack + 1) % playlist.length;
-        isPlaying = true;
+        isPlaying = true; // Ép trạng thái thành Đang phát
         loadTrack(currentTrack);
       });
 
       prevBtn.addEventListener('click', () => {
         currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
-        isPlaying = true;
+        isPlaying = true; // Ép trạng thái thành Đang phát
         loadTrack(currentTrack);
       });
 
+      // Tự động chuyển bài
       audio.addEventListener('ended', () => {
         currentTrack = (currentTrack + 1) % playlist.length;
         isPlaying = true;
         loadTrack(currentTrack);
       });
 
+      // Báo lỗi file nhạc
       audio.addEventListener('error', () => {
         mp3Text.innerHTML = `⚠️ LỖI: Không tìm thấy file ${playlist[currentTrack].src}`;
         isPlaying = false;
         playBtn.innerHTML = '▶';
       });
       
-      // FLOATING PARTICLES
+      // 5. Y2K FLOATING PARTICLES
       const container = document.getElementById('particles-container');
       const shapes = ['✨', '💖', '⭐', '🫧', '🦋', '🎵'];
       
@@ -655,6 +820,7 @@
         p.classList.add('particle');
         p.innerText = shapes[Math.floor(Math.random() * shapes.length)];
         
+        // Random vị trí và thời gian bay
         p.style.left = Math.random() * 100 + 'vw';
         p.style.animationDuration = (Math.random() * 7 + 5) + 's';
         p.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
