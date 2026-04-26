@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Name — Y2K Portfolio</title>
+  <title>PHẠM ÁI LINH — Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&family=VT323&display=swap" rel="stylesheet"/>
@@ -13,9 +13,9 @@
        NEWJEANS CORE TOKENS
     ============================================ */
     :root {
-      --nj-blue:    #a0cfff; /* Xanh bầu trời */
-      --nj-green:   #b2f252; /* Xanh lá mạ NewJeans */
-      --nj-pink:    #ff9ce6; /* Hồng Y2K */
+      --nj-blue:    #a0cfff; 
+      --nj-green:   #b2f252; 
+      --nj-pink:    #ff9ce6; 
       --nj-white:   #ffffff;
       --nj-black:   #1a1a1a;
       
@@ -32,9 +32,7 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: var(--font-text);
-      /* Background gradient xanh pastel + chấm bi mờ */
-      background: 
-        radial-gradient(circle at 50% 0%, #d5e8fe 0%, #a0cfff 100%);
+      background: radial-gradient(circle at 50% 0%, #d5e8fe 0%, #a0cfff 100%);
       background-attachment: fixed;
       color: var(--nj-black);
       line-height: 1.6;
@@ -43,107 +41,101 @@
     }
     a, button { cursor: none; text-decoration: none; color: inherit; font-family: inherit;}
 
-    /* Lưới Caro mờ phong cách sổ tay */
+    /* Background pattern */
     body::before {
-      content: '';
+      content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background-image: linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px);
+      background-size: 30px 30px; z-index: -1; pointer-events: none;
+    }
+
+    /* ============================================
+       FLOATING Y2K PARTICLES (NEW ANIMATION)
+    ============================================ */
+    #particles-container {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px);
-      background-size: 30px 30px;
-      z-index: -1; pointer-events: none;
+      pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .particle {
+      position: absolute; bottom: -50px;
+      animation: floatUp linear infinite;
+      opacity: 0.6; filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.1));
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
     }
 
     /* ============================================
        MAGNETIC BUBBLE CURSOR
     ============================================ */
     .cursor {
-      position: fixed; top: 0; left: 0;
-      width: 16px; height: 16px;
-      background-color: var(--nj-pink);
-      border: 2px solid var(--nj-black);
+      position: fixed; top: 0; left: 0; width: 16px; height: 16px;
+      background-color: var(--nj-pink); border: 2px solid var(--nj-black);
       border-radius: 50%; pointer-events: none; z-index: 9999;
       transform: translate(-50%, -50%);
       transition: width 0.3s var(--spring), height 0.3s var(--spring), background-color 0.3s;
       box-shadow: 2px 2px 0px var(--nj-black);
     }
-    
     body.cursor-hover .cursor {
-      width: 50px; height: 50px;
-      background-color: var(--nj-green);
-      mix-blend-mode: normal;
-      opacity: 0.8;
-      border-width: 3px;
+      width: 50px; height: 50px; background-color: var(--nj-green);
+      mix-blend-mode: normal; opacity: 0.8; border-width: 3px;
     }
 
     /* ============================================
-       STICKER TEXT EFFECT (NEWJEANS STYLE)
+       STICKER TEXT EFFECT
     ============================================ */
     .sticker-text {
-      font-family: var(--font-bubbly);
-      color: var(--nj-white);
-      /* Viền đen và đổ bóng cứng đặc trưng */
-      -webkit-text-stroke: 2px var(--nj-black);
-      text-shadow: 4px 4px 0px var(--nj-black);
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      font-family: var(--font-bubbly); color: var(--nj-white);
+      -webkit-text-stroke: 2px var(--nj-black); text-shadow: 4px 4px 0px var(--nj-black);
+      text-transform: uppercase; letter-spacing: 2px; position: relative; z-index: 10;
     }
     .sticker-text.green { color: var(--nj-green); }
     .sticker-text.pink { color: var(--nj-pink); }
+    .sticker-text.blue { color: #5bc0eb; }
 
     /* ============================================
        DRAGGABLE Y2K STICKERS
     ============================================ */
     .sticker {
-      position: absolute;
-      font-size: 4rem;
-      cursor: grab;
-      user-select: none;
-      z-index: 50;
-      filter: drop-shadow(3px 3px 0px var(--nj-black));
+      position: absolute; font-size: 4rem; cursor: grab; user-select: none;
+      z-index: 50; filter: drop-shadow(3px 3px 0px var(--nj-black));
       transition: transform 0.2s;
     }
     .sticker:active { cursor: grabbing; transform: scale(1.1) rotate(5deg); }
     
-    /* Vị trí ban đầu của các sticker */
     #stk-1 { top: 15%; left: 10%; transform: rotate(-15deg); }
-    #stk-2 { top: 60%; right: 15%; transform: rotate(10deg); font-size: 5rem;}
-    #stk-3 { top: 80%; left: 20%; transform: rotate(-5deg); font-size: 3.5rem;}
-    #stk-4 { top: 25%; right: 10%; transform: rotate(20deg); }
+    #stk-2 { top: 40%; right: 5%; transform: rotate(10deg); font-size: 5rem;}
+    #stk-3 { top: 80%; left: 8%; transform: rotate(-5deg); font-size: 3.5rem;}
+    #stk-4 { top: 110%; right: 10%; transform: rotate(20deg); font-size: 4.5rem;}
+    #stk-5 { top: 150%; left: 15%; transform: rotate(-25deg); font-size: 4rem;}
 
     /* ============================================
        RETRO MP3 PLAYER WIDGET
     ============================================ */
     .mp3-player {
-      position: fixed; bottom: 30px; left: 30px;
-      width: 260px; background: #e0e0e0;
-      border: 3px solid var(--nj-black);
-      border-radius: 15px;
-      box-shadow: 6px 6px 0px var(--nj-black);
-      z-index: 100;
-      padding: 10px;
-      cursor: grab;
+      position: fixed; bottom: 30px; left: 30px; width: 260px; background: #e0e0e0;
+      border: 3px solid var(--nj-black); border-radius: 15px;
+      box-shadow: 6px 6px 0px var(--nj-black); z-index: 100; padding: 10px; cursor: grab;
     }
     .mp3-player:active { cursor: grabbing; }
     .mp3-header {
-      font-family: var(--font-bubbly); font-size: 0.9rem;
-      text-align: center; border-bottom: 2px solid var(--nj-black);
-      padding-bottom: 5px; margin-bottom: 10px; background: var(--nj-pink);
-      border-radius: 10px 10px 0 0; border: 2px solid var(--nj-black);
+      font-family: var(--font-bubbly); font-size: 0.9rem; text-align: center; 
+      border-bottom: 2px solid var(--nj-black); padding-bottom: 5px; margin-bottom: 10px; 
+      background: var(--nj-pink); border-radius: 10px 10px 0 0; border: 2px solid var(--nj-black);
     }
     .mp3-screen {
-      background: #8b9bb4; border: 3px inset #555;
-      padding: 8px; border-radius: 5px;
-      font-family: var(--font-pixel); color: #fff; font-size: 1.1rem;
-      text-shadow: 1px 1px 0px #000;
-      margin-bottom: 10px;
+      background: #8b9bb4; border: 3px inset #555; padding: 8px; border-radius: 5px;
+      font-family: var(--font-pixel); color: #fff; font-size: 1.1rem; text-shadow: 1px 1px 0px #000;
+      margin-bottom: 10px; overflow: hidden; white-space: nowrap;
     }
     .mp3-controls { display: flex; justify-content: space-around; }
     .mp3-btn {
-      background: var(--nj-white); border: 2px solid var(--nj-black);
-      border-radius: 50%; width: 35px; height: 35px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.8rem; box-shadow: 2px 2px 0px var(--nj-black);
-      transition: transform 0.1s;
+      background: var(--nj-white); border: 2px solid var(--nj-black); border-radius: 50%; 
+      width: 35px; height: 35px; display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; box-shadow: 2px 2px 0px var(--nj-black); transition: transform 0.1s;
     }
     .mp3-btn:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0px var(--nj-black); }
 
@@ -155,14 +147,12 @@
       display: flex; justify-content: space-between; align-items: center; z-index: 100;
     }
     .logo {
-      font-family: var(--font-bubbly); font-size: 2rem;
-      color: var(--nj-white); -webkit-text-stroke: 1px var(--nj-black);
-      text-shadow: 2px 2px 0px var(--nj-black); transform: rotate(-2deg);
+      font-family: var(--font-bubbly); font-size: 2rem; color: var(--nj-white); 
+      -webkit-text-stroke: 1px var(--nj-black); text-shadow: 2px 2px 0px var(--nj-black); transform: rotate(-2deg);
     }
     .nav-links {
-      background: var(--nj-white); border: 2px solid var(--nj-black);
-      border-radius: 30px; padding: 0.5rem 1.5rem;
-      display: flex; gap: 2rem; box-shadow: 4px 4px 0px var(--nj-black);
+      background: var(--nj-white); border: 2px solid var(--nj-black); border-radius: 30px; 
+      padding: 0.5rem 1.5rem; display: flex; gap: 2rem; box-shadow: 4px 4px 0px var(--nj-black);
     }
     .nav-links a { font-family: var(--font-bubbly); font-size: 1rem; color: var(--nj-black); transition: color 0.2s;}
     .nav-links a:hover { color: var(--nj-pink); }
@@ -172,60 +162,76 @@
     ============================================ */
     .hero {
       min-height: 100vh; display: flex; flex-direction: column;
-      justify-content: center; align-items: center; text-align: center;
-      position: relative; padding: 0 4vw;
+      justify-content: center; align-items: center; text-align: center; position: relative; padding: 0 4vw;
     }
     .badge {
-      font-family: var(--font-bubbly); background: var(--nj-white);
-      border: 2px solid var(--nj-black); padding: 5px 15px; border-radius: 20px;
-      box-shadow: 3px 3px 0px var(--nj-black); margin-bottom: 2rem;
-      transform: rotate(2deg);
+      font-family: var(--font-bubbly); background: var(--nj-white); border: 2px solid var(--nj-black); 
+      padding: 5px 15px; border-radius: 20px; box-shadow: 3px 3px 0px var(--nj-black); margin-bottom: 2rem; transform: rotate(2deg);
+      position: relative; z-index: 10;
     }
     .hero-title { font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1.1; margin-bottom: 1rem; }
     .hero-desc {
-      font-size: 1.2rem; max-width: 500px; font-weight: 700;
-      background: var(--nj-white); border: 2px dashed var(--nj-black);
-      padding: 1.5rem; border-radius: 15px; margin-bottom: 3rem;
-      box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+      font-size: 1.2rem; max-width: 600px; font-weight: 700; position: relative; z-index: 10;
+      background: var(--nj-white); border: 2px dashed var(--nj-black); padding: 1.5rem; 
+      border-radius: 15px; margin-bottom: 3rem; box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
     }
 
-    /* Y2K Button */
-    .btn-magnetic-wrap { display: inline-block; padding: 20px; margin: -20px; }
+    .btn-magnetic-wrap { display: inline-block; padding: 20px; margin: -20px; position: relative; z-index: 10; }
     .btn {
-      display: inline-block; padding: 1rem 3rem;
-      background: var(--nj-green); color: var(--nj-black);
-      font-family: var(--font-bubbly); font-size: 1.2rem;
-      border: 3px solid var(--nj-black); border-radius: 50px;
-      box-shadow: 5px 5px 0px var(--nj-black);
-      transition: transform 0.1s; text-transform: uppercase;
+      display: inline-block; padding: 1rem 3rem; background: var(--nj-green); color: var(--nj-black);
+      font-family: var(--font-bubbly); font-size: 1.2rem; border: 3px solid var(--nj-black); border-radius: 50px;
+      box-shadow: 5px 5px 0px var(--nj-black); transition: transform 0.1s; text-transform: uppercase;
     }
     .btn:hover { background: var(--nj-pink); color: var(--nj-white); }
     .btn:active { transform: translate(4px, 4px) !important; box-shadow: 1px 1px 0px var(--nj-black); }
 
     /* ============================================
-       ABOUT & PROJECTS (SCRAPBOOK STYLE)
+       ABOUT & SCRAPBOOK
     ============================================ */
-    section { padding: 6rem 4vw; max-width: 1200px; margin: 0 auto; }
+    section { padding: 6rem 4vw; max-width: 1000px; margin: 0 auto; position: relative; z-index: 10;}
     .section-title { font-size: 4rem; text-align: center; margin-bottom: 4rem; transform: rotate(-2deg); }
-
-    .card {
+    
+    .about-box {
       background: var(--nj-white); border: 3px solid var(--nj-black);
-      border-radius: 20px; padding: 2.5rem;
-      box-shadow: 8px 8px 0px var(--nj-black);
-      margin-bottom: 3rem; position: relative;
+      border-radius: 20px; padding: 3rem; box-shadow: 8px 8px 0px var(--nj-black);
+      position: relative;
     }
-    /* Băng dính giả */
     .tape {
       position: absolute; top: -15px; left: 50%; transform: translateX(-50%) rotate(-2deg);
-      width: 120px; height: 35px; background: rgba(255,255,255,0.6);
-      border: 1px solid #ccc; box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+      width: 120px; height: 35px; background: rgba(255,255,255,0.7);
+      border: 1px solid #ccc; box-shadow: 1px 1px 3px rgba(0,0,0,0.1); z-index: 5;
     }
-    
-    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .about-text { font-size: 1.1rem; line-height: 1.8; font-weight: 600; text-align: justify;}
+    .highlight { background: var(--nj-green); padding: 0 5px; border-radius: 5px; border: 1px solid var(--nj-black); color: var(--nj-black);}
+
+    .scrapbook { display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem; margin-top: 3rem; }
+    .polaroid {
+      background: white; padding: 10px 10px 30px 10px; border: 2px solid var(--nj-black);
+      box-shadow: 5px 5px 0px rgba(0,0,0,0.2); width: 220px;
+      transition: transform 0.3s var(--spring); cursor: pointer;
+    }
+    .polaroid:nth-child(1) { transform: rotate(-5deg); }
+    .polaroid:nth-child(2) { transform: rotate(3deg); margin-top: 30px; }
+    .polaroid:nth-child(3) { transform: rotate(-2deg); }
+    .polaroid:hover { transform: scale(1.1) rotate(0deg); z-index: 10; }
+    .polaroid-img {
+      width: 100%; height: 180px; background: #ddd; border: 1px solid #999;
+      display: flex; align-items: center; justify-content: center; font-size: 3rem;
+    }
+    .polaroid-caption { font-family: 'Fredoka', cursive; text-align: center; margin-top: 10px; font-weight: 600; font-size: 0.9rem; }
+
+    /* ============================================
+       PROJECTS SECTION
+    ============================================ */
+    .card {
+      background: var(--nj-white); border: 3px solid var(--nj-black);
+      border-radius: 20px; padding: 2.5rem; box-shadow: 8px 8px 0px var(--nj-black);
+      margin-bottom: 3rem; position: relative;
+    }
+    .project-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: center; }
     .project-img {
-      width: 100%; height: 250px; background: var(--nj-blue);
-      border: 3px solid var(--nj-black); border-radius: 15px;
-      display: flex; align-items: center; justify-content: center;
+      width: 100%; height: 250px; background: var(--nj-blue); border: 3px solid var(--nj-black); 
+      border-radius: 15px; display: flex; align-items: center; justify-content: center;
       font-size: 4rem; box-shadow: inset 4px 4px 0px rgba(0,0,0,0.1);
     }
     .project-tag {
@@ -242,35 +248,41 @@
       .nav-links { display: none; }
       .project-grid { grid-template-columns: 1fr; }
       .mp3-player { bottom: 10px; left: 10px; transform: scale(0.8); }
-      .sticker { display: none; } /* Ẩn sticker trên mobile để tránh vướng */
+      .sticker { display: none; }
       body { cursor: auto; }
       .cursor { display: none; }
+      #particles-container { display: none; }
     }
   </style>
 </head>
 <body>
 
+  <div id="particles-container"></div>
+
   <div class="cursor" id="cursor"></div>
+
+  <audio id="bg-music" src="getup.mp3" loop></audio>
 
   <div class="sticker draggable" id="stk-1">🦋</div>
   <div class="sticker draggable" id="stk-2">💿</div>
   <div class="sticker draggable" id="stk-3">📱</div>
-  <div class="sticker draggable" id="stk-4">⭐</div>
+  <div class="sticker draggable" id="stk-4">🎧</div>
+  <div class="sticker draggable" id="stk-5">⭐</div>
 
   <div class="mp3-player draggable" id="mp3">
     <div class="mp3-header">MY PLAYLIST .mp3</div>
     <div class="mp3-screen">
-      <marquee scrollamount="4">▶ NOW PLAYING: TWICE - What is Love? ... ⏭ UP NEXT: Taylor Swift - Cruel Summer</marquee>
+      <marquee id="mp3-text" scrollamount="4">⏸ Click Play to Get Up! - NewJeans</marquee>
     </div>
     <div class="mp3-controls">
       <div class="mp3-btn hover-target">⏮</div>
-      <div class="mp3-btn hover-target" style="background: var(--nj-green);">▶</div>
+      <div class="mp3-btn hover-target" id="play-btn" style="background: var(--nj-green);">▶</div>
       <div class="mp3-btn hover-target">⏭</div>
     </div>
   </div>
 
   <nav>
-    <div class="logo">YOUR NAME</div>
+    <div class="logo">PHẠM ÁI LINH</div>
     <div class="nav-links">
       <a href="#about" class="hover-target">ABOUT</a>
       <a href="#projects" class="hover-target">PROJECTS</a>
@@ -284,12 +296,41 @@
     <h1 class="hero-title sticker-text pink" style="margin-top: -20px;">MARKETER</h1>
     
     <div class="hero-desc">
-      Hi! I'm a Marketing Communications student at UFM. 
-      I love turning ideas into colorful digital experiences! 🌸✨
+      Hi! I'm a student at UFM majoring in Marketing Communications. 
+      I love turning strategic ideas into colorful digital experiences! 🌸✨
     </div>
 
     <div class="btn-magnetic-wrap">
-      <a href="#projects" class="btn hover-target magnetic">VIEW ARCHIVES</a>
+      <a href="#about" class="btn hover-target magnetic">GET TO KNOW ME ↓</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2 class="section-title sticker-text blue">ABOUT ME</h2>
+    <div class="about-box">
+      <div class="tape"></div>
+      <div class="about-text">
+        <p>Hello there! 👋 I'm a Gen Z marketer who believes that the best campaigns are built on empathy, psychology, and a touch of web magic.</p>
+        <br>
+        <p>Currently, I'm honing my skills as an intern at <span class="highlight">Hạc Natural Beauty Care</span>, where I get to blend my love for communication strategy with real-world brand storytelling. When I'm not writing PR articles, analyzing PESTEL, or drafting TVC scripts, you can find me learning how to code interactive websites (just like this one!).</p>
+        <br>
+        <p>My ultimate goal? To become a marketer who doesn't just brief campaigns, but actively builds the experiences surrounding them.</p>
+      </div>
+
+      <div class="scrapbook">
+        <div class="polaroid hover-target">
+          <div class="polaroid-img" style="background: #ffccda;">📸</div>
+          <div class="polaroid-caption">Me at UFM!</div>
+        </div>
+        <div class="polaroid hover-target">
+          <div class="polaroid-img" style="background: #cbf078;">🌿</div>
+          <div class="polaroid-caption">Hạc Beauty Care</div>
+        </div>
+        <div class="polaroid hover-target">
+          <div class="polaroid-img" style="background: #a0cfff;">💻</div>
+          <div class="polaroid-caption">Coding late night</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -299,11 +340,11 @@
     <div class="card">
       <div class="tape"></div>
       <div class="project-grid">
-        <div class="project-img">☕</div>
+        <div class="project-img">✨</div>
         <div>
-          <div class="project-tag">BRANDING</div>
-          <h3 class="project-title">Local Café Rebrand</h3>
-          <p>Redesigned the entire brand identity for a local café to attract Gen Z customers. Created a fresh, bubbly aesthetic that boosted engagement.</p>
+          <div class="project-tag">CONTENT & PR</div>
+          <h3 class="project-title">Hạc Natural Beauty Care</h3>
+          <p>During my internship, I developed content strategies and assisted with PR campaigns. I learned how to translate a brand's core values into engaging stories that resonate with the target audience.</p>
         </div>
       </div>
     </div>
@@ -311,11 +352,23 @@
     <div class="card" style="transform: rotate(1deg);">
       <div class="tape" style="transform: translateX(-50%) rotate(2deg);"></div>
       <div class="project-grid" style="direction: rtl;">
-        <div class="project-img" style="background: var(--nj-green);">💻</div>
+        <div class="project-img" style="background: var(--nj-green);">📊</div>
         <div style="direction: ltr;">
-          <div class="project-tag" style="background: var(--nj-blue);">WEB DEV</div>
+          <div class="project-tag" style="background: var(--nj-blue);">STRATEGY</div>
+          <h3 class="project-title">Market Entry Analysis</h3>
+          <p>An academic project at UFM where I conducted comprehensive PESTEL analyses and formulated market entry strategies. It sharpened my analytical thinking and business acumen.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="transform: rotate(-1deg);">
+      <div class="tape" style="transform: translateX(-50%) rotate(-3deg);"></div>
+      <div class="project-grid">
+        <div class="project-img" style="background: var(--nj-pink);">🌐</div>
+        <div>
+          <div class="project-tag" style="background: var(--nj-black); color: white;">WEB DEV</div>
           <h3 class="project-title">Y2K Portfolio</h3>
-          <p>Coded this entire portfolio from scratch using HTML, CSS, and JS! I wanted a space that feels like my personal digital diary.</p>
+          <p>Coded this entire portfolio from scratch using HTML, CSS, and JS! I integrated custom cursors, draggable stickers, and a working MP3 player to create a space that feels like my personal digital diary.</p>
         </div>
       </div>
     </div>
@@ -323,6 +376,7 @@
 
   <section id="contact" style="text-align: center; padding-bottom: 10rem;">
     <h2 class="section-title sticker-text pink">LET'S CHAT!</h2>
+    <p style="font-weight: 600; margin-bottom: 2rem;">Always open for exciting opportunities or just a fun chat about K-pop! 🎶</p>
     <div class="btn-magnetic-wrap">
       <a href="mailto:your@email.com" class="btn hover-target magnetic" style="background: var(--nj-white);">SEND MESSAGE 💌</a>
     </div>
@@ -331,25 +385,22 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       
-      // 1. MAGNETIC CURSOR LOGIC
+      // 1. MAGNETIC CURSOR
       const cursor = document.getElementById('cursor');
-      
       if (window.matchMedia("(pointer: fine)").matches) {
         document.addEventListener('mousemove', e => {
-          // Add a slight delay for a smoother, floaty feel
           requestAnimationFrame(() => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
           });
         });
-
         document.querySelectorAll('.hover-target').forEach(el => {
           el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
           el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
         });
       }
 
-      // 2. MAGNETIC BUTTON EFFECT
+      // 2. MAGNETIC BUTTON
       const magnets = document.querySelectorAll('.magnetic');
       magnets.forEach(magnet => {
         magnet.addEventListener('mousemove', function(e) {
@@ -363,57 +414,83 @@
         });
       });
 
-      // 3. DRAGGABLE ELEMENTS (Stickers & MP3 Player)
+      // 3. DRAGGABLE STICKERS
       const draggables = document.querySelectorAll('.draggable');
-      
       draggables.forEach(el => {
-        let isDragging = false;
-        let currentX;
-        let currentY;
-        let initialX;
-        let initialY;
-        let xOffset = 0;
-        let yOffset = 0;
-
+        let isDragging = false, currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
         el.addEventListener("mousedown", dragStart);
         document.addEventListener("mouseup", dragEnd);
         document.addEventListener("mousemove", drag);
 
         function dragStart(e) {
-          initialX = e.clientX - xOffset;
-          initialY = e.clientY - yOffset;
+          initialX = e.clientX - xOffset; initialY = e.clientY - yOffset;
           if (e.target === el || el.contains(e.target)) {
             isDragging = true;
-            // Bring to front
             draggables.forEach(d => d.style.zIndex = "50");
             el.style.zIndex = "101"; 
           }
         }
-
-        function dragEnd() {
-          initialX = currentX;
-          initialY = currentY;
-          isDragging = false;
-        }
-
+        function dragEnd() { initialX = currentX; initialY = currentY; isDragging = false; }
         function drag(e) {
           if (isDragging) {
             e.preventDefault();
-            currentX = e.clientX - initialX;
-            currentY = e.clientY - initialY;
-            xOffset = currentX;
-            yOffset = currentY;
-            // Preserve existing rotations for stickers by checking IDs
+            currentX = e.clientX - initialX; currentY = e.clientY - initialY;
+            xOffset = currentX; yOffset = currentY;
             let rotation = "";
             if(el.id === "stk-1") rotation = "rotate(-15deg)";
             if(el.id === "stk-2") rotation = "rotate(10deg)";
             if(el.id === "stk-3") rotation = "rotate(-5deg)";
             if(el.id === "stk-4") rotation = "rotate(20deg)";
-            
+            if(el.id === "stk-5") rotation = "rotate(-25deg)";
             el.style.transform = `translate(${currentX}px, ${currentY}px) ${rotation}`;
           }
         }
       });
+
+      // 4. FUNCTIONAL MP3 PLAYER (NewJeans - Get Up)
+      const audio = document.getElementById('bg-music');
+      const playBtn = document.getElementById('play-btn');
+      const mp3Text = document.getElementById('mp3-text');
+      let isPlaying = false;
+
+      playBtn.addEventListener('click', () => {
+        if (isPlaying) {
+          audio.pause();
+          playBtn.innerHTML = '▶';
+          mp3Text.innerHTML = '⏸ Paused. Click Play to Get Up!';
+        } else {
+          audio.play();
+          playBtn.innerHTML = '⏸';
+          mp3Text.innerHTML = '▶ NOW PLAYING: NewJeans - Get Up 🐰✨';
+        }
+        isPlaying = !isPlaying;
+      });
+
+      // 5. Y2K FLOATING PARTICLES
+      const container = document.getElementById('particles-container');
+      const shapes = ['✨', '💖', '⭐', '🫧', '🦋', '🎵'];
+      
+      function createParticle() {
+        const p = document.createElement('div');
+        p.classList.add('particle');
+        p.innerText = shapes[Math.floor(Math.random() * shapes.length)];
+        
+        // Random vị trí chiều ngang
+        p.style.left = Math.random() * 100 + 'vw';
+        // Random thời gian bay (từ 5 đến 12 giây để tạo độ ngẫu nhiên)
+        p.style.animationDuration = (Math.random() * 7 + 5) + 's';
+        // Random kích thước
+        p.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+        
+        container.appendChild(p);
+        
+        // Xóa particle sau khi bay xong để khỏi nặng máy
+        setTimeout(() => p.remove(), 12000);
+      }
+      
+      // Tạo particle mới mỗi 600ms
+      setInterval(createParticle, 600);
+      
     });
   </script>
 </body>
