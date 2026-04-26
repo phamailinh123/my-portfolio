@@ -10,7 +10,7 @@
 
   <style>
     /* ============================================
-  
+       NEWJEANS CORE TOKENS
     ============================================ */
     :root {
       --nj-blue:    #a0cfff; 
@@ -50,7 +50,7 @@
     }
 
     /* ============================================
-       FLOATING Y2K PARTICLES (NEW ANIMATION)
+       FLOATING Y2K PARTICLES
     ============================================ */
     #particles-container {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -138,6 +138,147 @@
       font-size: 0.8rem; box-shadow: 2px 2px 0px var(--nj-black); transition: transform 0.1s;
     }
     .mp3-btn:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0px var(--nj-black); }
+
+    /* ============================================
+       Y2K INTERACTIVE CAT (VIRTUAL PET)
+    ============================================ */
+    #cyber-cat {
+      position: fixed;
+      bottom: 20px;
+      right: 3vw;
+      width: 100px;
+      height: 110px;
+      z-index: 999;
+      filter: drop-shadow(4px 4px 0px var(--nj-black));
+      cursor: pointer;
+      transition: transform 0.3s var(--spring);
+    }
+    #cyber-cat:hover { transform: translateY(-10px); }
+    
+    .cat-tail {
+      position: absolute;
+      bottom: 15px; right: -15px;
+      width: 40px; height: 50px;
+      border: 5px solid var(--nj-black);
+      border-radius: 0 40px 40px 0;
+      border-left: none; border-bottom: none;
+      transform-origin: bottom left;
+      animation: wag 2s infinite alternate ease-in-out;
+      z-index: 0;
+    }
+    .cat-ear {
+      position: absolute; top: -5px;
+      width: 0; height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-bottom: 30px solid var(--nj-black);
+      z-index: 1;
+    }
+    .cat-ear::after {
+      content: ''; position: absolute;
+      top: 6px; left: -7px;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: 18px solid var(--nj-pink);
+    }
+    .cat-ear.left { left: 5px; transform: rotate(-20deg); }
+    .cat-ear.right { right: 5px; transform: rotate(20deg); }
+    
+    .cat-body {
+      position: absolute;
+      bottom: 0; left: 10px;
+      width: 80px; height: 60px;
+      background: var(--nj-white);
+      border: 4px solid var(--nj-black);
+      border-radius: 40px 40px 20px 20px;
+      z-index: 2;
+    }
+    .cat-head {
+      position: absolute;
+      top: 5px; left: 0;
+      width: 100px; height: 75px;
+      background: var(--nj-white);
+      border: 4px solid var(--nj-black);
+      border-radius: 50px;
+      z-index: 3;
+    }
+    .cat-eye {
+      position: absolute; top: 25px;
+      width: 16px; height: 22px;
+      background: var(--nj-white);
+      border: 3px solid var(--nj-black);
+      border-radius: 50%;
+      display: flex; justify-content: center; align-items: center;
+    }
+    .cat-eye.left { left: 22px; }
+    .cat-eye.right { right: 22px; }
+    
+    .cat-pupil {
+      width: 8px; height: 8px;
+      background: var(--nj-black);
+      border-radius: 50%;
+      /* Vị trí được điều khiển bằng JS */
+    }
+    .cat-blush {
+      position: absolute; top: 40px;
+      width: 12px; height: 6px;
+      background: var(--nj-pink);
+      border-radius: 50%; opacity: 0.6;
+    }
+    .cat-blush.left { left: 10px; }
+    .cat-blush.right { right: 10px; }
+    
+    .cat-mouth {
+      position: absolute;
+      top: 35px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 16px; font-weight: bold;
+      color: var(--nj-black);
+    }
+    .cat-tongue {
+      position: absolute;
+      top: 52px; left: 50%;
+      transform: translateX(-50%) scaleY(0);
+      transform-origin: top;
+      width: 10px; height: 14px;
+      background: var(--nj-pink);
+      border: 2px solid var(--nj-black);
+      border-radius: 0 0 10px 10px;
+      transition: transform 0.2s;
+      z-index: 4;
+    }
+    .cat-paw-fg {
+      position: absolute;
+      bottom: -5px; left: 20px;
+      width: 20px; height: 25px;
+      background: var(--nj-white);
+      border: 3px solid var(--nj-black);
+      border-radius: 10px; z-index: 5;
+      transform-origin: bottom;
+      transition: transform 0.3s;
+    }
+
+    /* Hiệu ứng Mèo Licking (Liếm lông) */
+    .licking .cat-tongue {
+      transform: translateX(-50%) scaleY(1);
+      animation: lickAnim 0.3s infinite alternate;
+    }
+    .licking .cat-paw-fg {
+      animation: pawAnim 0.3s infinite alternate;
+    }
+    
+    @keyframes wag {
+      0% { transform: rotate(10deg); }
+      100% { transform: rotate(30deg); }
+    }
+    @keyframes lickAnim {
+      from { transform: translateX(-50%) scaleY(1); }
+      to { transform: translateX(-50%) scaleY(1.4); }
+    }
+    @keyframes pawAnim {
+      from { transform: translateY(-30px) translateX(10px) rotate(40deg); }
+      to { transform: translateY(-35px) translateX(12px) rotate(45deg); }
+    }
 
     /* ============================================
        NAVIGATION
@@ -252,6 +393,7 @@
       body { cursor: auto; }
       .cursor { display: none; }
       #particles-container { display: none; }
+      #cyber-cat { display: none; } /* Ẩn mèo trên mobile để tránh vướng màn hình */
     }
   </style>
 </head>
@@ -260,6 +402,22 @@
   <div id="particles-container"></div>
 
   <div class="cursor" id="cursor"></div>
+
+  <div id="cyber-cat">
+    <div class="cat-tail"></div>
+    <div class="cat-ear left"></div>
+    <div class="cat-ear right"></div>
+    <div class="cat-body"></div>
+    <div class="cat-head">
+      <div class="cat-blush left"></div>
+      <div class="cat-blush right"></div>
+      <div class="cat-eye left"><div class="cat-pupil" id="pupil-l"></div></div>
+      <div class="cat-eye right"><div class="cat-pupil" id="pupil-r"></div></div>
+      <div class="cat-mouth">w</div>
+      <div class="cat-tongue"></div>
+    </div>
+    <div class="cat-paw-fg"></div>
+  </div>
 
   <audio id="bg-music" src="getup.mp3"></audio>
 
@@ -398,20 +556,57 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       
-      // 1. MAGNETIC CURSOR
+      // Khai báo các thành phần của bé mèo
+      const pupilL = document.getElementById('pupil-l');
+      const pupilR = document.getElementById('pupil-r');
+      const cyberCat = document.getElementById('cyber-cat');
+
+      // 1. MAGNETIC CURSOR & MOUSE TRACKING
       const cursor = document.getElementById('cursor');
       if (window.matchMedia("(pointer: fine)").matches) {
         document.addEventListener('mousemove', e => {
+          
+          // Di chuyển con trỏ chuột
           requestAnimationFrame(() => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
           });
+
+          // LOGIC MẮT MÈO NHÌN THEO CHUỘT
+          function movePupil(pupil, mouseX, mouseY) {
+            if (!pupil) return;
+            const rect = pupil.getBoundingClientRect();
+            const eyeX = rect.left + rect.width / 2;
+            const eyeY = rect.top + rect.height / 2;
+            
+            const angle = Math.atan2(mouseY - eyeY, mouseX - eyeX);
+            const maxDist = 3; // Giới hạn khoảng cách tròng mắt di chuyển
+            
+            const tx = Math.cos(angle) * maxDist;
+            const ty = Math.sin(angle) * maxDist;
+            
+            pupil.style.transform = `translate(${tx}px, ${ty}px)`;
+          }
+
+          movePupil(pupilL, e.clientX, e.clientY);
+          movePupil(pupilR, e.clientX, e.clientY);
         });
+
         document.querySelectorAll('.hover-target').forEach(el => {
           el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
           el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
         });
       }
+
+      // LOGIC MÈO TỰ ĐỘNG LIẾM LÔNG
+      setInterval(() => {
+        if (Math.random() > 0.6) { // 40% tỷ lệ mèo sẽ liếm lông mỗi 5 giây
+          cyberCat.classList.add('licking');
+          setTimeout(() => {
+            cyberCat.classList.remove('licking');
+          }, 2000); // Hành động diễn ra trong 2 giây
+        }
+      }, 5000);
 
       // 2. MAGNETIC BUTTON
       const magnets = document.querySelectorAll('.magnetic');
