@@ -10,7 +10,7 @@
 
   <style>
     /* ============================================
-       NEWJEANS CORE TOKENS
+       CORE COLOR TOKENS
     ============================================ */
     :root {
       --nj-blue:    #a0cfff; 
@@ -18,6 +18,7 @@
       --nj-pink:    #ff9ce6; 
       --nj-white:   #ffffff;
       --nj-black:   #1a1a1a;
+      --nj-grey:    #e0e0e0; /* Màu xám cho mèo */
       
       --font-bubbly: 'Fredoka', sans-serif;
       --font-text:   'Nunito', sans-serif;
@@ -41,6 +42,7 @@
     }
     a, button { cursor: none; text-decoration: none; color: inherit; font-family: inherit;}
 
+    /* Background pattern */
     body::before {
       content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       background-image: linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px),
@@ -49,7 +51,7 @@
     }
 
     /* ============================================
-       FLOATING PARTICLES
+       FLOATING Y2K PARTICLES
     ============================================ */
     #particles-container {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -104,6 +106,7 @@
       transition: transform 0.2s;
     }
     .sticker:active { cursor: grabbing; transform: scale(1.1) rotate(5deg); }
+    
     #stk-1 { top: 15%; left: 10%; transform: rotate(-15deg); }
     #stk-2 { top: 40%; right: 5%; transform: rotate(10deg); font-size: 5rem;}
     #stk-3 { top: 80%; left: 8%; transform: rotate(-5deg); font-size: 3.5rem;}
@@ -111,7 +114,7 @@
     #stk-5 { top: 150%; left: 15%; transform: rotate(-25deg); font-size: 4rem;}
 
     /* ============================================
-       RETRO MP3 PLAYER
+       RETRO MP3 PLAYER WIDGET
     ============================================ */
     .mp3-player {
       position: fixed; bottom: 30px; left: 30px; width: 260px; background: #e0e0e0;
@@ -138,73 +141,72 @@
     .mp3-btn:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0px var(--nj-black); }
 
     /* ============================================
-       Y2K CHUBBY CAT (VIRTUAL PET) - NÂNG CẤP XỊN SÒ DỰA TRÊN HÌNH
+       🐈 Y2K VIRTUAL PET CAT (NÂNG CẤP XỊN) 🐈
     ============================================ */
     #cyber-cat {
       position: fixed;
-      bottom: 30px;
-      right: 40px;
-      width: 240px; /* Bự ngang cái MP3 */
-      height: 200px;
+      bottom: 20px;
+      right: 3vw;
+      width: 230px; /* Bự cỡ cái MP3 */
+      height: 190px;
       z-index: 99;
-      cursor: pointer;
       filter: drop-shadow(6px 6px 0px rgba(0,0,0,0.15));
+      cursor: pointer;
       transition: transform 0.3s var(--spring);
     }
     #cyber-cat:hover { transform: translateY(-10px); }
     
-    /* Đuôi béo ngoe nguẩy */
+    /* Đuôi béo ú ve vẩy đằng sau */
     .cat-tail {
       position: absolute;
-      bottom: 20px; right: -20px;
-      width: 80px; height: 80px;
+      bottom: 30px; right: -15px;
+      width: 60px; height: 70px;
       border: 6px solid var(--nj-black);
       border-radius: 0 40px 40px 0;
       border-left: none; border-bottom: none;
       transform-origin: bottom left;
-      animation: wag 3s infinite alternate ease-in-out;
+      animation: wag 2s infinite alternate ease-in-out;
       z-index: 0;
     }
-    
-    /* Thân hình béo ú màu trắng xám chân thật */
+
+    /* Thân hình béo ú, vững chãi */
     .cat-body {
       position: absolute;
-      bottom: 0; left: 20px;
-      width: 180px; height: 140px;
-      background: radial-gradient(circle at 70% 30%, var(--nj-white) 0%, #e0e0e0 100%); /* Màu trắng xám chân thật */
+      bottom: 0; left: 15px;
+      width: 190px; height: 130px;
+      background: var(--nj-white);
       border: 6px solid var(--nj-black);
-      border-radius: 90px 90px 40px 40px;
+      border-radius: 90px 90px 30px 30px;
       z-index: 1;
     }
 
-    /* Hai lỗ tai dễ thương */
+    /* Lỗ tai sleeker (gọn gàng), không bị tròn xoe Chibi */
     .cat-ear {
-      position: absolute;
-      top: -20px;
-      width: 60px; height: 60px;
+      position: absolute; top: -15px;
+      width: 50px; height: 50px;
       background: var(--nj-white);
       border: 6px solid var(--nj-black);
       z-index: 0;
     }
     .cat-ear.left {
-      left: 10px; border-radius: 15px 40px 15px 15px; transform: rotate(-15deg);
+      left: 10px; border-radius: 10px 40px 10px 10px; transform: rotate(-10deg);
     }
     .cat-ear.right {
-      right: 10px; border-radius: 40px 15px 15px 15px; transform: rotate(15deg);
+      right: 10px; border-radius: 40px 10px 10px 10px; transform: rotate(10deg);
     }
     .cat-ear::after { /* Lòng tai màu hồng */
       content: ''; position: absolute;
-      width: 25px; height: 25px;
+      bottom: 10px;
+      width: 20px; height: 20px;
       background: var(--nj-pink);
-      bottom: 5px;
     }
     .cat-ear.left::after { left: 15px; border-radius: 5px 20px 5px 5px; }
     .cat-ear.right::after { right: 15px; border-radius: 20px 5px 5px 5px; }
-
-    /* Mắt to tròn long lanh có đốm sáng Anime */
+    
+    /* Mắt to tròn, có thần, lia theo chuột */
     .cat-eye {
-      position: absolute; top: 50px;
-      width: 40px; height: 40px;
+      position: absolute; top: 40px;
+      width: 35px; height: 45px;
       background: var(--nj-white);
       border: 5px solid var(--nj-black);
       border-radius: 50%;
@@ -216,21 +218,21 @@
     
     .cat-pupil {
       position: absolute;
-      top: 5px; left: 5px;
-      width: 24px; height: 24px;
+      top: 10px; left: 10px;
+      width: 15px; height: 25px;
       background: var(--nj-black);
       border-radius: 50%;
     }
-    .cat-pupil::after { /* Đốm sáng Anime chân thật */
+    .cat-pupil::after { /* Đốm sáng tạo độ chân thật cho mắt */
       content: ''; position: absolute;
-      top: 3px; left: 3px; width: 8px; height: 8px;
+      top: 5px; left: 3px; width: 6px; height: 6px;
       background: var(--nj-white); border-radius: 50%;
     }
 
-    /* Má hồng */
+    /* Má hồng & Râu mèo gọn gàng */
     .cat-blush {
       position: absolute; top: 75px;
-      width: 20px; height: 10px;
+      width: 15px; height: 8px;
       background: var(--nj-pink);
       border-radius: 50%; opacity: 0.6;
       z-index: 2;
@@ -238,72 +240,75 @@
     .cat-blush.left { left: 15px; }
     .cat-blush.right { right: 15px; }
     
-    /* Mũi & Miệng chúm chím :3 đúng như hình */
-    .cat-nose {
-      position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
-      width: 12px; height: 8px; background: var(--nj-pink);
-      border-radius: 10px 10px 20px 20px; z-index: 2;
+    .cat-whiskers {
+      position: absolute; top: 85px;
+      width: 30px; height: 2px;
+      background: var(--nj-black);
+      z-index: 2;
     }
+    .cat-whiskers.left { left: -10px; transform: rotate(10deg); }
+    .cat-whiskers.right { right: -10px; transform: rotate(-10deg); }
+
+    /* Miệng `:3` đặc trưng gọn gàng */
     .cat-mouth {
-      position: absolute; top: 86px; left: 50%; transform: translateX(-50%);
-      display: flex; z-index: 2;
+      position: absolute;
+      top: 80px; left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      font-size: 1.5rem; font-weight: bold;
+      color: var(--nj-black);
+      z-index: 2;
     }
-    .cat-mouth::before, .cat-mouth::after {
-      content: ''; width: 14px; height: 12px;
-      border-bottom: 4px solid var(--nj-black); border-radius: 50%;
-    }
-    .cat-mouth::before { border-left: 4px solid var(--nj-black); transform: rotate(-20deg); margin-right: -2px; }
-    .cat-mouth::after { border-right: 4px solid var(--nj-black); transform: rotate(20deg); margin-left: -2px; }
-
-    /* Chân nghỉ ngơi nằm tĩnh */
-    .cat-paw-rest {
-      position: absolute; bottom: -5px;
-      width: 40px; height: 30px;
-      background: var(--nj-white);
-      border: 5px solid var(--nj-black);
-      border-radius: 20px; z-index: 3;
-    }
-    .cat-paw-rest.left { left: 40px; }
-    .cat-paw-rest.right { right: 40px; }
-
-    /* Lưỡi và Chân lúc liếm lông (Ẩn đi) */
-    .cat-tongue {
-      position: absolute; top: 92px; left: 50%; transform: translateX(-50%) scaleY(0);
-      transform-origin: top; width: 14px; height: 18px; background: var(--nj-pink);
-      border: 3px solid var(--nj-black); border-radius: 0 0 15px 15px; z-index: 1;
-    }
-    .cat-paw-licking {
-      position: absolute; top: 80px; left: 50%; margin-left: -20px;
-      width: 40px; height: 50px; background: var(--nj-white);
-      border: 5px solid var(--nj-black); border-radius: 25px;
-      opacity: 0; z-index: 4; transform-origin: bottom center;
-    }
-
-    /* ============================================
-       ANIMATION TRẠNG THÁI MÈO (LIẾM LÔNG)
-    ============================================ */
-    @keyframes wag {
-      0% { transform: rotate(5deg); }
-      100% { transform: rotate(25deg); }
+    .cat-tongue { /* Lưỡi lúc liếm lông */
+      position: absolute;
+      top: 98px; left: 50%;
+      transform: translateX(-50%) scaleY(0);
+      transform-origin: top;
+      width: 12px; height: 16px;
+      background: var(--nj-pink);
+      border: 3px solid var(--nj-black);
+      border-radius: 0 0 10px 10px;
+      transition: transform 0.2s;
+      z-index: 1;
     }
     
+    /* Chân nằm béo ú vững chãi */
+    .cat-paw-fg {
+      position: absolute;
+      bottom: -10px; left: 40px;
+      width: 45px; height: 40px;
+      background: var(--nj-white);
+      border: 5px solid var(--nj-black);
+      border-radius: 20px; z-index: 5;
+      transform-origin: bottom center;
+      transition: transform 0.3s;
+    }
+    .cat-paw-rest { /* Chân sau tĩnh */
+      position: absolute; bottom: 0; left: 110px;
+      width: 50px; height: 30px; background: var(--nj-grey);
+      border: 4px solid var(--nj-black); border-radius: 20px; z-index: 0;
+    }
+
+    /* Hiệu ứng Mèo Licking (Liếm lông) chân thật */
     .licking .cat-tongue {
       transform: translateX(-50%) scaleY(1);
       animation: lickAnim 0.3s infinite alternate;
     }
-    .licking .cat-paw-licking {
-      opacity: 1;
-      animation: pawRub 0.3s infinite alternate ease-in-out;
+    .licking .cat-paw-fg {
+      animation: pawAnim 0.3s infinite alternate;
     }
-    .licking .cat-paw-rest.right { opacity: 0; } /* Giấu 1 chân đi */
-
+    
+    @keyframes wag {
+      0% { transform: rotate(5deg); }
+      100% { transform: rotate(25deg); }
+    }
     @keyframes lickAnim {
       from { transform: translateX(-50%) scaleY(1); }
       to { transform: translateX(-50%) scaleY(1.4); }
     }
-    @keyframes pawRub {
-      from { transform: translateY(15px) rotate(-15deg); }
-      to { transform: translateY(-5px) rotate(15deg); }
+    @keyframes pawAnim {
+      from { transform: translateY(0px) rotate(0deg); }
+      to { transform: translateY(-35px) translateX(20px) rotate(45deg); }
     }
 
     /* ============================================
@@ -381,13 +386,10 @@
     .polaroid:nth-child(2) { transform: rotate(3deg); margin-top: 30px; }
     .polaroid:nth-child(3) { transform: rotate(-2deg); }
     .polaroid:hover { transform: scale(1.1) rotate(0deg); z-index: 10; }
-    
     .polaroid-img {
       width: 100%; height: 180px; background: #ddd; border: 1px solid #999;
-      display: flex; align-items: center; justify-content: center; font-size: 3rem; overflow: hidden;
+      display: flex; align-items: center; justify-content: center; font-size: 3rem;
     }
-    /* Style cho ảnh thật chèn vào polaroid */
-    .polaroid-img img { width: 100%; height: 100%; object-fit: cover; }
     .polaroid-caption { font-family: 'Fredoka', cursive; text-align: center; margin-top: 10px; font-weight: 600; font-size: 0.9rem; }
 
     /* ============================================
@@ -402,9 +404,8 @@
     .project-img {
       width: 100%; height: 250px; background: var(--nj-blue); border: 3px solid var(--nj-black); 
       border-radius: 15px; display: flex; align-items: center; justify-content: center;
-      font-size: 4rem; box-shadow: inset 4px 4px 0px rgba(0,0,0,0.1); overflow: hidden;
+      font-size: 4rem; box-shadow: inset 4px 4px 0px rgba(0,0,0,0.1);
     }
-    .project-img img { width: 100%; height: 100%; object-fit: cover; }
     .project-tag {
       display: inline-block; background: var(--nj-pink); color: var(--nj-white);
       font-family: var(--font-bubbly); padding: 5px 10px; border-radius: 10px;
@@ -423,7 +424,7 @@
       body { cursor: auto; }
       .cursor { display: none; }
       #particles-container { display: none; }
-      #cyber-cat { display: none; } /* Ẩn mèo trên đt cho đỡ vướng */
+      #cyber-cat { display: none; } /* Ẩn mèo trên mobile để tránh vướng màn hình */
     }
   </style>
 </head>
@@ -438,20 +439,24 @@
     <div class="cat-body">
       <div class="cat-ear left"></div>
       <div class="cat-ear right"></div>
-      <div class="cat-eye left"><div class="cat-pupil" id="pupil-l"></div></div>
-      <div class="cat-eye right"><div class="cat-pupil" id="pupil-r"></div></div>
       <div class="cat-blush left"></div>
       <div class="cat-blush right"></div>
-      <div class="cat-nose"></div>
-      <div class="cat-mouth"></div>
+      
+      <div class="cat-eye left"><div class="cat-pupil" id="pupil-l"></div></div>
+      <div class="cat-eye right"><div class="cat-pupil" id="pupil-r"></div></div>
+      
+      <div class="cat-whiskers left"></div>
+      <div class="cat-whiskers right"></div>
+      
+      <div class="cat-mouth">w</div>
       <div class="cat-tongue"></div>
-      <div class="cat-paw-rest left"></div>
-      <div class="cat-paw-rest right"></div>
-      <div class="cat-paw-licking"></div>
+      
+      <div class="cat-paw-rest"></div>
     </div>
+    <div class="cat-paw-fg"></div>
   </div>
 
-  <audio id="bg-music"></audio>
+  <audio id="bg-music" src="getup.mp3"></audio>
 
   <div class="sticker draggable" id="stk-1">🦋</div>
   <div class="sticker draggable" id="stk-2">💿</div>
@@ -508,28 +513,18 @@
       </div>
 
       <div class="scrapbook">
-        
         <div class="polaroid hover-target">
-          <div class="polaroid-img" style="background: #ffccda;">
-            📸 
-          </div>
+          <div class="polaroid-img" style="background: #ffccda;">📸</div>
           <div class="polaroid-caption">Me at UFM!</div>
         </div>
-
         <div class="polaroid hover-target">
-          <div class="polaroid-img" style="background: #cbf078;">
-            🌿
-          </div>
+          <div class="polaroid-img" style="background: #cbf078;">🌿</div>
           <div class="polaroid-caption">Công ty Tâm Anh</div>
         </div>
-
         <div class="polaroid hover-target">
-          <div class="polaroid-img" style="background: #a0cfff;">
-            💻
-          </div>
+          <div class="polaroid-img" style="background: #a0cfff;">💻</div>
           <div class="polaroid-caption">Coding late night</div>
         </div>
-
       </div>
     </div>
   </section>
@@ -540,9 +535,7 @@
     <div class="card">
       <div class="tape"></div>
       <div class="project-grid">
-        <div class="project-img">
-           ✨
-        </div>
+        <div class="project-img">✨</div>
         <div>
           <div class="project-tag">CONTENT & PR</div>
           <h3 class="project-title">Công ty Tâm Anh</h3>
@@ -554,9 +547,7 @@
     <div class="card" style="transform: rotate(1deg);">
       <div class="tape" style="transform: translateX(-50%) rotate(2deg);"></div>
       <div class="project-grid" style="direction: rtl;">
-        <div class="project-img" style="background: var(--nj-green);">
-          📊
-        </div>
+        <div class="project-img" style="background: var(--nj-green);">📊</div>
         <div style="direction: ltr;">
           <div class="project-tag" style="background: var(--nj-blue);">STRATEGY</div>
           <h3 class="project-title">Market Entry Analysis</h3>
@@ -568,9 +559,7 @@
     <div class="card" style="transform: rotate(-1deg);">
       <div class="tape" style="transform: translateX(-50%) rotate(-3deg);"></div>
       <div class="project-grid">
-        <div class="project-img" style="background: var(--nj-pink);">
-          🌐
-        </div>
+        <div class="project-img" style="background: var(--nj-pink);">🌐</div>
         <div>
           <div class="project-tag" style="background: var(--nj-black); color: white;">WEB DEV</div>
           <h3 class="project-title">Y2K Portfolio</h3>
@@ -580,7 +569,7 @@
     </div>
   </section>
 
-  <section id="contact" style="text-align: center; padding-bottom: 10rem;">
+<section id="contact" style="text-align: center; padding-bottom: 10rem;">
     <h2 class="section-title sticker-text pink">LET'S CHAT!</h2>
     <p style="font-weight: 600; margin-bottom: 2rem;">Always open for exciting opportunities or just a fun chat about K-pop! 🎶</p>
     
@@ -604,40 +593,40 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       
-      // LOGIC MẮT MÈO NHÌN THEO CHUỘT (Nâng cấp)
+      // 1. MAGNETIC CURSOR & CAT MOUSE TRACKING
+      const cursor = document.getElementById('cursor');
       const pupilL = document.getElementById('pupil-l');
       const pupilR = document.getElementById('pupil-r');
       const cyberCat = document.getElementById('cyber-cat');
 
-      const cursor = document.getElementById('cursor');
       if (window.matchMedia("(pointer: fine)").matches) {
         document.addEventListener('mousemove', e => {
-          // Di chuyển con trỏ chuột
+          // Di chuyển con trỏ chuột custom
           requestAnimationFrame(() => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
           });
 
-          // Toán học để mắt mèo lia theo chân thật
-          function movePupil(pupil, mouseX, mouseY) {
-            if (!pupil) return;
-            const rect = pupil.getBoundingClientRect();
-            // Lấy tâm con mắt
-            const eyeX = rect.left + rect.width / 2;
-            const eyeY = rect.top + rect.height / 2;
-            
-            // Tính góc và giới hạn khoảng cách (Tối đa 6px để lòng đen không rớt ra ngoài lòng trắng)
-            const angle = Math.atan2(mouseY - eyeY, mouseX - eyeX);
-            const maxDist = 6; 
-            
-            const tx = Math.cos(angle) * maxDist;
-            const ty = Math.sin(angle) * maxDist;
-            
-            pupil.style.transform = `translate(${tx}px, ${ty}px)`;
-          }
+          // LOGIC MẮT MÈO NHÌN THEO CHUỘT
+          if (pupilL && pupilR) {
+            function movePupil(pupil, mouseX, mouseY) {
+              const rect = pupil.parentElement.getBoundingClientRect(); // Lấy khung tròng trắng mắt
+              const eyeX = rect.left + rect.width / 2; // Tâm mắt
+              const eyeY = rect.top + rect.height / 2;
+              
+              const angle = Math.atan2(mouseY - eyeY, mouseX - eyeX); // Tính góc nhìn
+              const maxDist = 6; // Giới hạn khoảng cách tròng đen di chuyển (6px)
+              
+              const tx = Math.cos(angle) * maxDist;
+              const ty = Math.sin(angle) * maxDist;
+              
+              // Áp dụng di chuyển cho tròng đen
+              pupil.style.transform = `translate(${tx}px, ${ty}px)`;
+            }
 
-          movePupil(pupilL, e.clientX, e.clientY);
-          movePupil(pupilR, e.clientX, e.clientY);
+            movePupil(pupilL, e.clientX, e.clientY);
+            movePupil(pupilR, e.clientX, e.clientY);
+          }
         });
 
         document.querySelectorAll('.hover-target').forEach(el => {
@@ -646,18 +635,19 @@
         });
       }
 
-      // LOGIC MÈO TỰ ĐỘNG LIẾM LÔNG NGẪU NHIÊN (Nâng cấp dễ thương)
-      setInterval(() => {
-        // Tỷ lệ 50% mèo sẽ liếm lông mỗi 6 giây
-        if (Math.random() > 0.5) { 
-          cyberCat.classList.add('licking');
-          setTimeout(() => {
-            cyberCat.classList.remove('licking');
-          }, 2500); // Hành động diễn ra trong 2.5 giây
-        }
-      }, 6000);
+      // 6. CAT IDLE ACTIONS (Tự động liếm lông)
+      if (cyberCat) {
+        setInterval(() => {
+          if (Math.random() > 0.6) { // 40% tỷ lệ mèo sẽ liếm lông mỗi 6 giây
+            cyberCat.classList.add('licking');
+            setTimeout(() => {
+              cyberCat.classList.remove('licking');
+            }, 2500); // Hành động liếm lông diễn ra trong 2.5 giây
+          }
+        }, 6000);
+      }
 
-      // MAGNETIC BUTTON
+      // 2. MAGNETIC BUTTON
       const magnets = document.querySelectorAll('.magnetic');
       magnets.forEach(magnet => {
         magnet.addEventListener('mousemove', function(e) {
@@ -671,7 +661,7 @@
         });
       });
 
-      // DRAGGABLE STICKERS
+      // 3. DRAGGABLE STICKERS
       const draggables = document.querySelectorAll('.draggable');
       draggables.forEach(el => {
         let isDragging = false, currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
@@ -704,7 +694,7 @@
         }
       });
 
-      // FUNCTIONAL MP3 PLAYER (Đã vá lỗi xong)
+      // 4. FUNCTIONAL MP3 PLAYER (Đã vá lỗi xong)
       const audio = document.getElementById('bg-music');
       const playBtn = document.getElementById('play-btn');
       const prevBtn = document.getElementById('prev-btn');
@@ -784,7 +774,7 @@
         playBtn.innerHTML = '▶';
       });
       
-      // FLOATING PARTICLES
+      // 5. Y2K FLOATING PARTICLES
       const container = document.getElementById('particles-container');
       const shapes = ['✨', '💖', '⭐', '🫧', '🦋', '🎵'];
       
