@@ -62,6 +62,44 @@
       100%{transform:translateY(-110vh) rotate(360deg);opacity:0}
     }
 
+
+    /* ============================================
+       MÈO CỦA LINH — GIỮ LẠI TỪ CODE CŨ
+    ============================================ */
+    #real-cat{
+      position:fixed;bottom:20px;right:3vw;width:220px;z-index:99;
+      cursor:pointer;transform-origin:center bottom;
+      transition:transform .15s ease-out;
+      display:flex;flex-direction:column;align-items:center;
+    }
+    #cat-img{
+      width:100%;height:auto;display:block;
+      filter:drop-shadow(6px 6px 0 rgba(0,0,0,.15));
+      transition:transform .3s var(--spring);
+    }
+    #real-cat:hover #cat-img{transform:scale(1.05);}
+    .cat-dialogue{
+      position:absolute;top:-20px;left:50%;
+      transform:translateX(-50%) scale(0);
+      background:var(--white);border:3px solid var(--black);
+      padding:5px 15px;border-radius:20px;
+      font:700 1rem var(--font-display);color:var(--black);
+      white-space:nowrap;box-shadow:4px 4px 0 var(--black);
+      transition:transform .3s var(--spring),opacity .2s;
+      opacity:0;z-index:10;
+    }
+    .cat-dialogue::after{
+      content:'';position:absolute;bottom:-8px;left:50%;
+      transform:translateX(-50%);
+      border-width:8px 8px 0;border-style:solid;
+      border-color:var(--black) transparent transparent transparent;
+    }
+    .cat-dialogue.show{transform:translateX(-50%) scale(1);opacity:1;}
+    #cat-contact{
+      position:absolute;bottom:-30px;background:var(--black);color:var(--white);
+      font:700 .9rem var(--font-pixel);padding:2px 10px;border-radius:10px;
+    }
+
     nav{
       position:fixed;top:0;left:0;width:100%;padding:22px 4vw;
       display:flex;justify-content:space-between;align-items:center;z-index:100;
@@ -120,10 +158,38 @@
     section{max-width:1050px;margin:0 auto;padding:90px 5vw}
     .section-title{
       text-align:center;margin-bottom:55px;
-      font:800 clamp(2.9rem,6.5vw,4.7rem)/1 var(--font-display);
+      font:800 clamp(2.8rem,6.2vw,4.5rem)/1.08 var(--font-display);
       text-transform:uppercase;
-      -webkit-text-stroke:2px var(--black);
-      text-shadow:4px 4px 0 var(--black);
+      letter-spacing:.3px;
+      -webkit-text-stroke:0;
+      text-shadow:
+        2px 2px 0 rgba(255,255,255,.95),
+        4px 5px 0 rgba(30,45,90,.18);
+      filter:drop-shadow(0 3px 7px rgba(30,45,90,.08));
+    }
+    .section-title.blue{
+      color:#4b8fd8;
+      text-shadow:
+        2px 2px 0 #fff,
+        4px 5px 0 #b9d8ff;
+    }
+    .section-title:not(.blue):not(.pink):not(.green){
+      color:#d66ab8;
+      text-shadow:
+        2px 2px 0 #fff,
+        4px 5px 0 #f5c7e8;
+    }
+    .section-title.pink{
+      color:#87a83b;
+      text-shadow:
+        2px 2px 0 #fff,
+        4px 5px 0 #d9ef9d;
+    }
+    .section-title.green{
+      color:#3b9a8f;
+      text-shadow:
+        2px 2px 0 #fff,
+        4px 5px 0 #a8e7df;
     }
 
     .about-box,.card{
@@ -150,17 +216,33 @@
 
     .project-list{display:grid;gap:35px}
     .card{padding:32px}
-    .project-grid{display:grid;grid-template-columns:220px 1fr;gap:32px;align-items:center}
+    .project-grid{display:grid;grid-template-columns:minmax(280px,38%) 1fr;gap:32px;align-items:center}
     .project-visual{
-      min-height:190px;border:3px solid var(--black);border-radius:15px;
-      display:flex;align-items:center;justify-content:center;font-size:5rem;
-      box-shadow:inset 4px 4px 0 rgba(0,0,0,.08)
+      min-height:220px;height:250px;border:3px solid var(--black);border-radius:15px;
+      overflow:hidden;background:#f4f1ff;
+      box-shadow:inset 4px 4px 0 rgba(0,0,0,.08),4px 4px 0 rgba(20,25,50,.12);
+      transform:rotate(-1deg);
+    }
+    .project-visual img{
+      width:100%;height:100%;display:block;
+      object-fit:cover;object-position:center;
+      transition:transform .35s var(--spring),filter .35s ease;
+    }
+    .card:hover .project-visual img{
+      transform:scale(1.035);
+      filter:saturate(1.08);
+    }
+    .image-placeholder{
+      display:flex;align-items:center;justify-content:center;
+      width:100%;height:100%;min-height:220px;
+      font:700 1.2rem/1.2 var(--font-display);
+      color:var(--black);text-align:center;letter-spacing:.2px;
     }
     .visual-pink{background:var(--pink)}
     .visual-green{background:var(--green)}
     .visual-blue{background:var(--blue)}
     .visual-white{background:var(--white)}
-    .tag{
+    .tag{letter-spacing:.2px;
       display:inline-block;padding:5px 10px;background:var(--pink);
       border:2px solid var(--black);border-radius:10px;
       font:700 .9rem var(--font-display);margin-bottom:10px
@@ -168,8 +250,8 @@
     .tag.blue{background:var(--blue)}
     .tag.green{background:var(--green)}
     .tag.black{background:var(--black);color:var(--white)}
-    .project-title{font:700 2rem var(--font-display);margin-bottom:10px}
-    .project-desc{font-weight:600;line-height:1.75;margin-bottom:18px;letter-spacing:-.05px}
+    .project-title{font:700 clamp(1.65rem,2.5vw,2.05rem)/1.2 var(--font-display);margin-bottom:10px;letter-spacing:.1px}
+    .project-desc{font-weight:500;line-height:1.8;margin-bottom:18px;letter-spacing:0}
     .proof{
       display:flex;gap:10px;flex-wrap:wrap;align-items:center;
       margin-top:14px;font-size:.9rem;font-weight:800
@@ -223,12 +305,14 @@
       body{cursor:auto}.cursor{display:none}
       nav{padding:15px 4vw}.logo{font-size:1.4rem}.nav-links{display:none}
       .hero-title{font-size:clamp(3rem,15.5vw,5rem);letter-spacing:0}
+      #real-cat{display:none}
+      .section-title{font-size:clamp(2.35rem,10vw,3.4rem);line-height:1.08}
       .hero-desc{letter-spacing:-.1px;font-size:1rem}
       section{padding:65px 5vw}
       .about-box{padding:30px 22px}
       .stats{grid-template-columns:1fr}
       .project-grid{grid-template-columns:1fr}
-      .project-visual{min-height:140px}
+      .project-visual{min-height:210px;height:210px}
       .sticker{display:none}
       .mp3{transform:scale(.78);transform-origin:bottom left;bottom:8px;left:8px}
     }
@@ -236,8 +320,20 @@
 </head>
 
 <body>
+  <!--
+    CÁCH THÊM ẢNH: tạo thư mục images cạnh file HTML, sau đó
+    bỏ comment quanh dòng <img> trong từng project.
+    Ví dụ: <img src="images/facebook-content.jpg" alt="Bài viết Facebook">
+  -->
   <div id="particles"></div>
   <div class="cursor" id="cursor"></div>
+  <!-- MÈO CỦA LINH: đặt cat.png cùng thư mục với file HTML -->
+  <div id="real-cat">
+    <div class="cat-dialogue" id="cat-dialogue">Meowww~ ✨</div>
+    <img src="cat.png" alt="Mèo của Linh" id="cat-img">
+    <a href="#contact" id="cat-contact">♡</a>
+  </div>
+
 
   <div class="sticker draggable" id="s1">🦋</div>
   <div class="sticker draggable" id="s2">💿</div>
@@ -267,12 +363,12 @@
 
   <main>
     <section class="hero">
-      <div class="badge">SINH VIÊN MARKETING • UFM</div>
-      <h1 class="hero-title green">SÁNG TẠO</h1>
+      <div class="badge">SINH VIÊN MARKETING</div>
+      <h1 class="hero-title green">CREATIVE</h1>
       <h1 class="hero-title pink" style="margin-top:-12px">MARKETING</h1>
       <div class="hero-desc">
-        Xin chào, mình là Linh. Mình thích biến một ý tưởng còn nằm trên giấy
-        thành nội dung mà người khác muốn dừng lại, đọc, xem và nhớ đến.
+        Xin chào, mình là Linh. Hi, mình là Linh. Mình đang học Marketing và thích làm những thứ liên quan đến content, creative và digital.
+        Whatever it is - I like to make marketing interesting.
       </div>
       <a class="btn hover" href="#projects">XEM NHỮNG GÌ MÌNH ĐÃ LÀM ↓</a>
     </section>
@@ -289,43 +385,39 @@
           </p>
           <br>
           <p>
-            Mình thích tự tay làm hơn là chỉ nói về một ý tưởng. Vì vậy, ngoài viết
-            nội dung và nghiên cứu người xem, mình còn thử sức với việc xây website,
-            quản lý kênh TikTok và biến những bài tập trên lớp thành những sản phẩm
-            có thể mở lên và xem được thật.
+            Mình luôn muốn trang bị cho mình nhiều kỹ năng khác. Vì vậy, ngoài viết
+            nội dung và nghiên cứu người dùng, mình còn thử sức với việc xây website,
+            quản lý kênh TikTok và học thêm về AI nữa.
           </p>
           <br>
           <p>
             Portfolio này cũng được mình tự xây dựng. Nó không cố gắng làm mình
-            trông “hoàn hảo” — mình chỉ muốn cho bạn thấy mình đã làm gì, mình học
-            được gì và mình đang muốn đi tiếp về đâu.
+            trông “hoàn hảo” hơn — mình chỉ muốn cho bạn thấy mình đã làm gì, mình học
+            được gì và mình đang muốn phát triển theo hướng nào.
           </p>
         </div>
 
-        <div class="stats">
-          <div class="stat"><strong>700K+</strong><span>Lượt xem TikTok cao nhất</span></div>
-          <div class="stat"><strong>100K+</strong><span>Lượt thích</span></div>
-          <div class="stat"><strong>4K+</strong><span>Tương tác cho một bài viết</span></div>
-        </div>
-      </div>
-    </section>
-
     <section id="projects">
-      <h2 class="section-title">MÌNH ĐÃ LÀM</h2>
+      <h2 class="section-title">MỘT SỐ THỨ MÌNH ĐÃ LÀM</h2>
 
       <div class="project-list">
         <article class="card">
           <div class="tape"></div>
           <div class="project-grid">
-            <div class="project-visual visual-pink">✍️</div>
+            <div class="project-visual visual-pink">
+              <!-- THÊM ẢNH DỰ ÁN FACEBOOK Ở ĐÂY
+              <img src="images/facebook-content.jpg" alt="Bài viết Facebook">
+              -->
+              <span class="image-placeholder">📸 THÊM ẢNH Ở ĐÂY</span>
+            </div>
             <div>
               <div class="tag">CONTENT • FACEBOOK</div>
-              <h3 class="project-title">Bài viết đạt gần 4.000 lượt tương tác</h3>
+              <h3 class="project-title">Viết bài cho Câu lạc bộ của trường</h3>
               <p class="project-desc">
                 Một sản phẩm nội dung mình trực tiếp thực hiện. Đây là một trong
                 những bài có hiệu quả tương tác nổi bật trong các sản phẩm mình đã làm.
               </p>
-              <div class="proof"><span>~4.000 tương tác</span><span>Nội dung thực tế</span></div>
+              <div class="proof"><span>~4.000 tương tác</span><span>Bài đăng truyền thông</span></div>
               <br>
               <a class="btn small hover" target="_blank" rel="noopener"
                  href="https://www.facebook.com/share/p/1DJJi9bMH8/">XEM BÀI VIẾT ↗</a>
@@ -336,18 +428,23 @@
         <article class="card" style="transform:rotate(1deg)">
           <div class="tape"></div>
           <div class="project-grid">
-            <div class="project-visual visual-blue">🏫</div>
+            <div class="project-visual visual-blue">
+              <!-- THÊM ẢNH DỰ ÁN UFM Ở ĐÂY
+              <img src="images/ufm-article.jpg" alt="Bài viết trên website UFM">
+              -->
+              <span class="image-placeholder">📰 THÊM ẢNH Ở ĐÂY</span>
+            </div>
             <div>
               <div class="tag blue">PR • BÀI VIẾT</div>
               <h3 class="project-title">Bài viết được đăng trên website UFM</h3>
               <p class="project-desc">
-                Bài viết về hoạt động học tập thực tế tại doanh nghiệp, được đăng
-                trên website chính thức của Trường Đại học Tài chính – Marketing.
+                Bài article về hoạt động học tập thực tế tại doanh nghiệp, được đăng
+                trên website chính thức của Trường Đại học Tài chính – Marketing do chính tay mình viết.
               </p>
-              <div class="proof"><span>Website chính thức UFM</span><span>PR / Content</span></div>
+              <div class="proof"><span>PR / Content</span></div>
               <br>
               <a class="btn small blue-btn hover" target="_blank" rel="noopener"
-                 href="https://ufm.edu.vn/sinh-vien-ufm-hoc-tap-thuc-te-tai-cong-ty-tnhh-ke-toan-kiem-toan-nhan-tai-viet-1593.html">ĐỌC BÀI TRÊN UFM ↗</a>
+                 href="https://ufm.edu.vn/sinh-vien-ufm-hoc-tap-thuc-te-tai-cong-ty-tnhh-ke-toan-kiem-toan-nhan-tai-viet-1593.html">ĐỌC BÀI ↗</a>
             </div>
           </div>
         </article>
@@ -355,16 +452,21 @@
         <article class="card" style="transform:rotate(-1deg)">
           <div class="tape"></div>
           <div class="project-grid">
-            <div class="project-visual visual-green">🌐</div>
+            <div class="project-visual visual-green">
+              <!-- THÊM ẢNH WEBSITE O-SKIN Ở ĐÂY
+              <img src="images/oskin-website.jpg" alt="Website O-Skin">
+              -->
+              <span class="image-placeholder">💻 THÊM ẢNH Ở ĐÂY</span>
+            </div>
             <div>
               <div class="tag green">WEB • TỰ XÂY DỰNG</div>
-              <h3 class="project-title">O-Skin — website mình tự làm</h3>
+              <h3 class="project-title">O-Skin website</h3>
               <p class="project-desc">
                 Mình tự xây dựng website phục vụ cho môn học, từ phần giao diện
                 đến cách sắp xếp nội dung. Đây cũng là cách mình thử đưa tư duy
-                Marketing vào một sản phẩm số cụ thể.
+                Marketing vào một sản phẩm số cụ thể. Vì chỉ là sản phẩm phục vụ cho môn học nên mình không đầu tư quá hoàn chỉnh, chỉ có các tính năng cơ bản của 1 trang web mà thôi
               </p>
-              <div class="proof"><span>Tự thực hiện</span><span>Website thực tế</span></div>
+              <div class="proof"><span>Website thực tế</span></div>
               <br>
               <a class="btn small hover" target="_blank" rel="noopener"
                  href="https://o-skin.vercel.app/">GHÉ THĂM WEBSITE ↗</a>
@@ -375,19 +477,24 @@
         <article class="card">
           <div class="tape"></div>
           <div class="project-grid">
-            <div class="project-visual visual-white">🎮</div>
+            <div class="project-visual visual-white">
+              <!-- THÊM ẢNH TIKTOK Ở ĐÂY
+              <img src="images/tiktok-channel.jpg" alt="Kênh TikTok">
+              -->
+              <span class="image-placeholder">🎮 THÊM ẢNH Ở ĐÂY</span>
+            </div>
             <div>
               <div class="tag black">SOCIAL MEDIA • TIKTOK</div>
-              <h3 class="project-title">Kênh TikTok Game Content Creator</h3>
+              <h3 class="project-title">Kênh TikTok</h3>
               <p class="project-desc">
                 Mình xây dựng và quản lý một kênh TikTok cá nhân theo hướng Game
                 Content Creator: tự nghiên cứu trend, lên ý tưởng, sản xuất video
-                và theo dõi các chỉ số để điều chỉnh nội dung.
+                và theo dõi các chỉ số để điều chỉnh nội dung. Tuy nhiên do mình không chơi game đó nữa nên mình đã ngưng sản xuất nội dung trên kênh
               </p>
               <div class="proof">
                 <span>5.000+ người theo dõi</span>
                 <span>700.000+ lượt xem</span>
-                <span>100.000+ lượt thích</span>
+                <span>117.000+ lượt thích</span>
               </div>
               <br>
               <a class="btn small black hover" target="_blank" rel="noopener"
@@ -415,10 +522,12 @@
     </section>
 
     <section id="contact" class="contact">
-      <h2 class="section-title green">NÓI CHUYỆN VỚI MÌNH?</h2>
-      <p>Nếu bạn muốn trao đổi về Marketing, Content hoặc một dự án thú vị nào đó — cứ nhắn mình nhé. ✨</p>
+      <h2 class="section-title green">LIÊN HỆ VỚI MÌNH</h2>
+      <p>Nếu bạn muốn trao đổi về Marketing, Content hoặc Tuyển dụng cứ nhắn mình nhé. ✨</p>
       <div class="contact-buttons">
-        <a class="btn white hover" href="mailto:phamailinhbn@gmail.com">💌 EMAIL</a>
+       <a class="btn white hover"
+   href="https://mail.google.com/mail/?view=cm&fs=1&to=phamailinhbn@gmail.com"
+   target="_blank">💌 EMAIL</a>
         <a class="btn blue-btn hover" target="_blank" rel="noopener" href="https://www.linkedin.com/in/linh-pham-bb7b153a8/">💼 LINKEDIN</a>
         <a class="btn hover" target="_blank" rel="noopener" href="https://www.facebook.com/linhxinhdephaha">✨ FACEBOOK</a>
         <a class="btn black hover" target="_blank" rel="noopener" href="https://www.tiktok.com/@eihn.ry55">🎮 TIKTOK</a>
@@ -426,10 +535,44 @@
     </section>
   </main>
 
-  <footer>© 2026 Phạm Ái Linh — làm bằng sự tò mò, một chút code và rất nhiều ý tưởng. ♡</footer>
+  <footer>© 2026 Phạm Ái Linh — I'm jobless please hire meee!!!!. ♡</footer>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+
+      // ================= MÈO TƯƠNG TÁC — CODE CŨ =================
+      const realCat = document.getElementById('real-cat');
+      const catDialogue = document.getElementById('cat-dialogue');
+
+      if (window.matchMedia("(pointer: fine)").matches) {
+        document.addEventListener('mousemove', e => {
+          if (!realCat || realCat.classList.contains('acting')) return;
+          const rect = realCat.getBoundingClientRect();
+          const catX = rect.left + rect.width / 2;
+          const catY = rect.top + rect.height / 2;
+          const deltaX = e.clientX - catX;
+          const deltaY = e.clientY - catY;
+          const rotateY = Math.max(-18, Math.min(18, deltaX * 0.05));
+          const rotateX = Math.max(-15, Math.min(15, -deltaY * 0.05));
+          realCat.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+      }
+
+      setInterval(() => {
+        if (Math.random() > 0.7 && realCat) {
+          realCat.classList.add('acting');
+          realCat.style.transition = 'transform .3s var(--spring)';
+          realCat.style.transform = 'perspective(600px) scale(1.08) rotate(-3deg)';
+          if (catDialogue) catDialogue.classList.add('show');
+          setTimeout(() => {
+            realCat.style.transition = 'transform .2s ease-out';
+            realCat.style.transform = 'perspective(600px) scale(1) rotate(0deg)';
+            if (catDialogue) catDialogue.classList.remove('show');
+            realCat.classList.remove('acting');
+          }, 2500);
+        }
+      }, 6000);
+
       const cursor = document.getElementById("cursor");
       if (window.matchMedia("(pointer:fine)").matches) {
         document.addEventListener("mousemove", e => {
